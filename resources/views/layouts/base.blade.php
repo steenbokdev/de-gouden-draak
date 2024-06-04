@@ -27,6 +27,8 @@
             </div>
 
             <section class="section">
+                @include('layouts.partials.notification')
+
                 <main class="container hero is-large">
                     @yield('content')
                 </main>

@@ -3,5 +3,7 @@
 ])
 
 @section('content')
-<span>Hello, World!</span>
+<span class="is-size-4">
+    Hello, World!
+</span>
 @endsection

@@ -8,6 +8,8 @@
         <script src="https://kit.fontawesome.com/5679c2bc30.js" crossorigin="anonymous"></script>
 
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+        @stack('styles')
+        @stack('scripts')
 
         <title>
             @isset($title)

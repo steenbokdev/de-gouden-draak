@@ -21,6 +21,16 @@
     </head>
 
     <body>
-        @yield('content')
+        <div class="hero is-fullheight">
+            <section class="section">
+                <main class="container hero is-large">
+                    @yield('content')
+                </main>
+            </section>
+
+            <div class="hero-foot">
+                @include('layouts.partials.footer')
+            </div>
+        </div>
     </body>
 </html>

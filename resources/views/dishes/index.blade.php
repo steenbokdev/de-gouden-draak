@@ -75,4 +75,6 @@
             </tbody>
         </table>
     </div>
+
+    {{ $dishes->links('vendor.pagination.bulma') }}
 @endsection

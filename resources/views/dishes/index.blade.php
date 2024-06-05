@@ -76,5 +76,5 @@
         </table>
     </div>
 
-    {{ $dishes->links('vendor.pagination.bulma') }}
+    {{ $dishes->appends(request()->except('page'))->links('vendor.pagination.bulma') }}
 @endsection

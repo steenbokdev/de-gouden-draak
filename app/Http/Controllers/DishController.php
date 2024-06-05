@@ -17,4 +17,14 @@ class DishController extends Controller
             'dishes' => $dishes
         ]);
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Dish $dish)
+    {
+        return view('dishes.edit', [
+            'dish' => $dish
+        ]);
+    }
 }

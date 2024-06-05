@@ -29,7 +29,7 @@
                         {{ __('dish/shared.description') }}
                     </th>
                     <th>
-                        {{ __('dish/index.actions') }}
+                        {{ __('dish/index.actions.term') }}
                     </th>
                 </tr>
             </thead>
@@ -59,15 +59,8 @@
                             {{ $dish->description }}
                         </td>
                         <td>
-                            <a class="has-text-info">
-                                <span class="icon is-medium">
-                                    <i class="fa-solid fa-lg fa-pen-to-square"></i>
-                                </span>
-                            </a>
-                            <a class="has-text-danger">
-                                <span class="icon is-medium">
-                                    <i class="fa-solid fa-lg fa-trash-can"></i>
-                                </span>
+                            <a href="{{ route('dishes.edit', $dish) }}">
+                                {{ __('dish/index.actions.see') }}
                             </a>
                         </td>
                     </tr>

@@ -30,6 +30,48 @@
                 @include('layouts.partials.notification')
 
                 <main class="container hero is-large">
+                    @isset($title)
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <h1 class="title is-1">
+                                        {{ $title }}
+                
+                                        @isset($action)
+                                            / {{ $action }}
+                                        @endisset
+                                    </h1>
+                                </div>
+                            </div>
+
+                            @hasSection('addons')
+                                <div class="level-right">
+                                    <div class="level-item">
+                                        @yield('addons')
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    @endisset
+
+                    <div class="level">
+                        @hasSection('addons-left')
+                            <div class="level-left">
+                                <div class="level-item">
+                                    @yield('addons-left')
+                                </div>
+                            </div>
+                        @endif
+    
+                        @hasSection('addons-right')
+                            <div class="level-right">
+                                <div class="level-item">
+                                    @yield('addons-right')
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
                     @yield('content')
                 </main>
             </section>

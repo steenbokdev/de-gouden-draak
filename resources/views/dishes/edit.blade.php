@@ -18,12 +18,12 @@
             <div class="field-body">
                 <x-form.input label="{{ __('dish/shared.menu_number') }}" type="number" value="{{ $dish->menu_number }}" />
                 <x-form.input label="{{ __('dish/shared.menu_addition') }}" type="text" value="{{ $dish->menu_addition }}" />
-                <x-form.input label="{{ __('dish/shared.name') }}" type="text" value="{{ $dish->name }}" />
             </div>
         </div>
 
         <div class="field is-horizontal">
             <div class="field-body">
+                <x-form.input label="{{ __('dish/shared.name') }}" type="text" value="{{ $dish->name }}" />
                 <x-form.input label="{{ __('dish/shared.price') }}" type="number" step="0.01" value="{{ $dish->price }}" />
                 <x-form.input label="{{ __('dish/shared.category') }}" type="text" value="{{ $dish->category }}" />
             </div>

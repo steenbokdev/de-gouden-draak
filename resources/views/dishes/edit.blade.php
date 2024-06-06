@@ -4,9 +4,14 @@
 ])
 
 @section('addons')
-    <a class="button is-danger is-outlined">
-        {{ __('dish/edit.delete') }}
-    </a>
+    <form action="{{ route('dishes.destroy', $dish) }}" method="POST">
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" class="button is-danger is-outlined">
+            {{ __('dish/edit.delete') }}
+        </button>
+    </form>
 @endsection
 
 @section('content')

@@ -9,5 +9,6 @@ return [
     'form_controls' => [
         'primary' => 'Wijzigingen opslaan',
         'secondary' => 'Wijzigingen annuleren'
-    ]
+    ],
+    'updated' => 'Gerecht succesvol bijgewerkt'
 ];

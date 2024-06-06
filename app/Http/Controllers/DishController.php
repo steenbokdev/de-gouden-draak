@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Notification;
+use App\Http\Requests\UpdateDishRequest;
 use App\Models\Dish;
 
 class DishController extends Controller
@@ -25,6 +27,23 @@ class DishController extends Controller
     {
         return view('dishes.edit', [
             'dish' => $dish
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateDishRequest $request, Dish $dish)
+    {
+        $validated = $request->validated();
+
+        $dish->update($validated);
+
+        return redirect()->route('dishes.index')->with([
+            'notification' => [
+                'type' => Notification::Success,
+                'body' => __('dish/edit.updated')
+            ]
         ]);
     }
 }

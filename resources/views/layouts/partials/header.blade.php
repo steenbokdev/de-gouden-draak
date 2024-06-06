@@ -23,6 +23,9 @@
 
             <x-header.navbar-item route="{{ route('dishes.index') }}"
                                   label="{{ __('header.routes.dishes') }}"/>
+
+            <x-header.navbar-item route="{{ route('cocktail.index') }}"
+                                  label="{{ __('header.routes.cocktail') }}"/>
         </div>
 
         <div class="navbar-end">

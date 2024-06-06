@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::resource('dishes', DishController::class)->only(['index', 'edit', 'update', 'destroy']);
+Route::resource('dishes', DishController::class)->except(['show']);

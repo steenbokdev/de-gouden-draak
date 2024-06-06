@@ -3,7 +3,7 @@
 ])
 
 @section('addons')
-    <a class="button is-primary">
+    <a href="{{ route('dishes.create') }}" class="button is-primary">
         {{ __('dish/index.add_dish') }}
     </a>
 @endsection

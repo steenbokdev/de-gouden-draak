@@ -4,7 +4,7 @@
 ])
 
 @section('content')
-    <form action="{{ route('dishes.create') }}" method="POST">
+    <form action="{{ route('dishes.store') }}" method="POST">
         @csrf
         @method('POST')
 

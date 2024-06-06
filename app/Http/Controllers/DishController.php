@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Notification;
+use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use App\Models\Dish;
 
@@ -26,6 +27,17 @@ class DishController extends Controller
     public function create()
     {
         return view('dishes.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreDishRequest $request)
+    {
+        $validated = $request->validated();
+        Dish::create($validated);
+
+        return redirect()->route('dishes.index');
     }
     /**
      * Show the form for editing the specified resource.

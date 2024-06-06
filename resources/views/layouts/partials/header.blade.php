@@ -20,6 +20,9 @@
         <div class="navbar-start">
             <x-header.navbar-item route="{{ route('home') }}"
                                   label="{{ __('header.routes.home') }}"/>
+
+            <x-header.navbar-item route="{{ route('dishes.index') }}"
+                                  label="{{ __('header.routes.dishes') }}"/>
         </div>
 
         <div class="navbar-end">

@@ -13,7 +13,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::sortable()->paginate(10);
+        $dishes = Dish::sortable()->paginate(35);
 
         return view('dishes.index', [
             'dishes' => $dishes

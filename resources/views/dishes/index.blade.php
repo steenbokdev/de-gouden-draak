@@ -2,7 +2,13 @@
     'title' => __('dish/index.page_title')
 ])
 
-@section('addons')
+@section('addons-left')
+    <form action="{{ route('dishes.index') }}" method="GET">
+        <x-form.search id="search" type="text" placeholder="{{ __('dish/index.search') }}" value="{{ $searchQuery }}"/>
+    </form>
+@endsection
+
+@section('addons-right')
     <a href="{{ route('dishes.create') }}" class="button is-primary">
         {{ __('dish/index.add_dish') }}
     </a>

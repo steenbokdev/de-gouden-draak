@@ -4,7 +4,29 @@
 
 @section('addons-left')
     <form action="{{ route('dishes.index') }}" method="GET">
-        <x-form.search id="search" type="text" placeholder="{{ __('dish/index.search') }}" value="{{ $searchQuery }}"/>
+        <div class="field is-grouped">
+            <x-form.search id="search" type="text" placeholder="{{ __('dish/index.search') }}" value="{{ $searchQuery }}"/>
+
+            <div class="field is-grouped">
+                <x-form.select id="category">
+                    <option disabled selected>
+                        {{ __('dish/index.category') }}
+                    </option>
+    
+                    @foreach ($categories['collection'] as $category)
+                        <option value="{{ $category }}" @selected($category === $categories['selected'])>
+                            {{ $category }}
+                        </option>
+                    @endforeach
+                </x-form.select>
+    
+                <div class="control">
+                    <button type="submit" class="button is-primary">
+                        {{ __('dish/index.apply') }}
+                    </button>
+                </div>
+            </div>
+        </div>
     </form>
 @endsection
 

@@ -5,7 +5,7 @@ return [
     'add_dish' => 'Nieuw gerecht aanmaken',
     'actions' => [
         'term' => 'Acties',
-        'see' => 'Bekijken'
+        'edit' => 'Bewerken'
     ],
     'empty' => 'Geen gerechten gevonden'
 ];

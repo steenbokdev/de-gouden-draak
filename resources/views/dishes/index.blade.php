@@ -60,7 +60,7 @@
                         </td>
                         <td>
                             <a href="{{ route('dishes.edit', $dish) }}">
-                                {{ __('dish/index.actions.see') }}
+                                {{ __('dish/index.actions.edit') }}
                             </a>
                         </td>
                     </tr>

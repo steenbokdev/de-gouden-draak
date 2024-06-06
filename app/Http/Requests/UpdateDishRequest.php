@@ -25,7 +25,7 @@ class UpdateDishRequest extends FormRequest
             'menu_number' => 'nullable|numeric',
             'menu_addition' => 'nullable|string',
             'name' => 'required|string',
-            'price' => 'nullable|numeric',
+            'price' => 'nullable|numeric|min:0',
             'category' => 'nullable|string',
             'description' => 'nullable|string'
         ];
@@ -45,7 +45,10 @@ class UpdateDishRequest extends FormRequest
                 'required' => __('validation.required', ['attribute' => __('dish/shared.name')]),
                 'string' => __('validation.string', ['attribute' => __('dish/shared.name')])
             ],
-            'price.numeric' => __('validation.numeric', ['attribute' => __('dish/shared.price')]),
+            'price' => [
+                'numeric' => __('validation.numeric', ['attribute' => __('dish/shared.price')]),
+                'min' => __('validation.min', ['attribute' => __('dish/shared.price'), 'min' => '0'])
+            ],
             'category.string' => __('validation.string', ['attribute' => __('dish/shared.category')]),
             'description.string' => __('validation.string', ['attribute' => __('dish/shared.description')])
         ];

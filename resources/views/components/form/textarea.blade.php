@@ -1,14 +1,14 @@
 <div class="field">
-    <label class="label">
+    <label class="label" for="{{ $id }}">
         {{ $label }}
     </label>
     <div class="control">
-        <textarea class="textarea" placeholder="{{ $placeholder ?? $value }}">{{ $value }}</textarea>
+        <textarea class="textarea" name="{{ $id }}" placeholder="{{ $placeholder ?? $value }}">{{ old($id) ?? $value }}</textarea>
     </div>
     
-    @isset($help)
-        <p class="help">
-            {{ $help }}
+    @if($errors || $help)
+        <p class="help @if ($errors) has-text-danger @endif">
+            {{ $errors->first($id) ?? $help }}
         </p>
-    @endisset
+    @endif
 </div>

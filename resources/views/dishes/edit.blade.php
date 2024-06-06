@@ -36,7 +36,13 @@
 
         <x-form.textarea id="description" label="{{ __('dish/shared.description') }}" type="text" value="{{ $dish->description }}" />
 
-        <x-form.controls primary-text="{{ __('dish/edit.form_controls.primary') }}"
-                         secondary-text="{{ __('dish/edit.form_controls.secondary') }}" />
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <x-go-back label="{{ __('dish/edit.return') }}" route="{{ route('dishes.index') }}" />
+
+                <x-form.controls primary-text="{{ __('dish/edit.form_controls.primary') }}"
+                                 secondary-text="{{ __('dish/edit.form_controls.secondary') }}" />
+            </div>
+        </div>
     </form>
 @endsection

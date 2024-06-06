@@ -3,7 +3,7 @@
         {{ $label }}
     </label>
     <div class="control">
-        <textarea class="textarea" name="{{ $id }}" placeholder="{{ $placeholder ?? $value }}">{{ old($id) ?? $value }}</textarea>
+        <textarea class="textarea" name="{{ $id }}" placeholder="{{ $placeholder ?? $value }}">{!! old($id) ?? $value !!}</textarea>
     </div>
     
     @if($errors || $help)

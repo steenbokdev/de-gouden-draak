@@ -4,9 +4,9 @@
     </label>
     <div class="control">
         @if ($type === 'number')
-            <input class="input" type="{{ $type }}" name="{{ $id }}" step="{{ $step }}" placeholder="{{ $placeholder ?? $value }}" value="{{ old($id) ?? $value }}">
+            <input class="input" type="{{ $type }}" name="{{ $id }}" step="{{ $step }}" placeholder="{{ $placeholder ?? $value }}" value="{!! old($id) ?? $value !!}">
         @else
-            <input class="input" type="{{ $type }}" name="{{ $id }}" placeholder="{{ $placeholder ?? $value }}" value="{{ old($id) ?? $value }}">
+            <input class="input" type="{{ $type }}" name="{{ $id }}" placeholder="{{ $placeholder ?? $value }}" value="{!! old($id) ?? $value !!}">
         @endif
     </div>
     

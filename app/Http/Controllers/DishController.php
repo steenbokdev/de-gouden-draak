@@ -20,13 +20,13 @@ class DishController extends Controller
         $dishes = Dish::sortable();
         $categories = Dish::whereNotNull('category')->distinct()->pluck('category')->unique();
 
+        if (isset($categoryQuery)) {
+            $dishes = $dishes->where('category', $categoryQuery);
+        }
+
         if (isset($searchQuery)) {
             $dishes = $dishes->where('name', 'like', "%$searchQuery%")
                              ->orWhere('menu_number', 'like', "%$searchQuery%");
-        }
-
-        if (isset($categoryQuery)) {
-            $dishes = $dishes->where('category', $categoryQuery);
         }
 
         $dishes = $dishes->paginate(35);

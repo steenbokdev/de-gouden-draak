@@ -6,5 +6,6 @@ return [
     'actions' => [
         'term' => 'Acties',
         'see' => 'Bekijken'
-    ]
+    ],
+    'empty' => 'Geen gerechten gevonden'
 ];

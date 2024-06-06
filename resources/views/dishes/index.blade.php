@@ -35,7 +35,7 @@
             </thead>
 
             <tbody>
-                @foreach ($dishes as $dish)
+                @forelse ($dishes as $dish)
                     <tr>
                         <td>
                             @isset($dish->menu_number)
@@ -64,7 +64,15 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6">
+                            <em>
+                                {{ __('dish/index.empty') }}
+                            </em>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

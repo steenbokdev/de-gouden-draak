@@ -15,7 +15,7 @@ class Input extends Component
         public string $id,
         public string $label,
         public string $type,
-        public string $value,
+        public string $value = '',
         public string $placeholder = '',
         public string $help = '',
         public float $step = 0

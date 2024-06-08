@@ -2,5 +2,5 @@
 
 return [
     'search' => 'Zoeken',
-    'reset_filter' => 'Reset filters'
+    'reset_filter' => 'Wis filters'
 ];

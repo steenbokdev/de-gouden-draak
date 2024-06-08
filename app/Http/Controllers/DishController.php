@@ -14,10 +14,30 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::sortable()->paginate(35);
+        $searchQuery = request()->input('search');
+        $categoryQuery = request()->input('category');
+
+        $dishes = Dish::sortable();
+        $categories = Dish::whereNotNull('category')->distinct()->pluck('category')->unique();
+
+        if (isset($categoryQuery)) {
+            $dishes = $dishes->where('category', $categoryQuery);
+        }
+
+        if (isset($searchQuery)) {
+            $dishes = $dishes->where('name', 'like', "%$searchQuery%")
+                             ->orWhere('menu_number', 'like', "%$searchQuery%");
+        }
+
+        $dishes = $dishes->paginate(35);
 
         return view('dishes.index', [
-            'dishes' => $dishes
+            'dishes' => $dishes,
+            'searchQuery' => $searchQuery,
+            'categories' => [
+                'collection' => $categories,
+                'selected' => $categoryQuery
+            ]
         ]);
     }
 

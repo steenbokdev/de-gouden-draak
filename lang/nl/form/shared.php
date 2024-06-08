@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'search' => 'Zoeken'
+    'search' => 'Zoeken',
+    'reset_filter' => 'Reset filters'
 ];

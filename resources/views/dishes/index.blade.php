@@ -26,6 +26,10 @@
                     </button>
                 </div>
             </div>
+
+            <div class="control">
+                <x-form.reset-filter route="{{ route('dishes.index') }}"/>
+            </div>
         </div>
     </form>
 @endsection

@@ -2,6 +2,10 @@
     'title' => __('cocktail/index.page_title')
 ])
 
+@section('addons')
+    <x-form.reset-filter route="{{ route('cocktail.index') }}"/>
+@endsection
+
 @section('addons-left')
     <form action="{{ route('cocktail.index') }}" method="GET">
         <x-form.search id="search" route="{{ route('cocktail.index') }}" type="text" placeholder="{{ __('cocktail/index.search') }}" value="{{ $searchQuery }}"/>

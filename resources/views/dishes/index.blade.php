@@ -81,7 +81,14 @@
                         </td>
                         <td>
                             @isset($dish->price)
-                                &euro; {{ $dish->price }}
+                                @if(isset($dish->discount_price))
+                                    <s>
+                                        &euro; {{ $dish->price }}
+                                    </s>
+                                    &euro; {{ $dish->discount_price }}
+                                @else
+                                    &euro; {{ $dish->price }}
+                                @endif
                             @endisset
                         </td>
                         <td>

@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'menu_number' => 'Menunumber',
+    'menu_number' => 'Menu number',
     'menu_addition' => 'Addition',
     'name' => 'Name',
     'price' => 'Price',
     'category' => 'Category',
-    'description' => 'Description',
+    'description' => 'Description'
 ];

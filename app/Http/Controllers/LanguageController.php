@@ -15,6 +15,6 @@ class LanguageController extends Controller
 
         session(['language' => $language]);
 
-        return redirect()->back()->with(['language_switched' => $language]);
+        return redirect()->back();
     }
 }

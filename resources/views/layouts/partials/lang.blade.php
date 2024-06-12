@@ -4,8 +4,8 @@
 
         <div class="select" id="lang">
             <select onchange="this.form.submit()" name="language">
-                <option value="en" {{ session('language') == 'en' ? 'selected' : '' }}>English</option>
                 <option value="nl" {{ session('language') == 'nl' ? 'selected' : '' }}>Nederlands</option>
+                <option value="en" {{ session('language') == 'en' ? 'selected' : '' }}>English</option>
             </select>
         </div>
         <span class="icon is-left">

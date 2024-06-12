@@ -18,6 +18,9 @@ class DishController extends Controller
         $categoryQuery = request()->input('category');
 
         $dishes = Dish::sortable();
+
+        $dishes->leftJoin('deals', 'dishes.id', '=', 'deals.dish_id')->select('dishes.*', 'deals.price as discount_price');
+
         $categories = Dish::whereNotNull('category')->distinct()->pluck('category')->unique();
 
         if (isset($categoryQuery)) {

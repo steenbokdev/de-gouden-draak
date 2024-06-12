@@ -25,7 +25,7 @@
                                   label="{{ __('header.routes.dishes') }}"/>
 
             <x-header.navbar-item route="{{ route('deals.index') }}"
-                                  label="{{ __('dish/deal.page_title') }}"/>
+                                  label="{{ __('header.routes.deals') }}"/>
 
             <x-header.navbar-item route="{{ route('cocktail.index') }}"
                                   label="{{ __('header.routes.cocktail') }}"/>

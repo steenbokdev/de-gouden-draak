@@ -32,7 +32,9 @@
         </div>
 
         <div class="navbar-end">
-            @include('layouts.partials.lang')
+            <a class="navbar-item">
+                @include('layouts.partials.lang')
+            </a>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     <span class="icon-text">

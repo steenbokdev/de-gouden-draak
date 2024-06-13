@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Deal;
 use App\Models\Dish;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class DownloadController extends Controller

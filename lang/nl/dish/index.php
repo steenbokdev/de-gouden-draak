@@ -5,6 +5,7 @@ return [
     'search' => 'Zoek naar gerechten',
     'category' => 'Kies een categorie',
     'add_dish' => 'Nieuw gerecht aanmaken',
+    'download_menu' => 'Menu downloaden',
     'actions' => [
         'term' => 'Acties',
         'edit' => 'Bewerken'

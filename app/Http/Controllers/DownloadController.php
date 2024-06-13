@@ -27,6 +27,6 @@ class DownloadController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML(view('menu_pdf', ['dishes' => $dishes, 'discounts' => $discounts])->render());
-        return $pdf->download('menu-de-gouden-draak .pdf');
+        return $pdf->download('menu-de-gouden-draak.pdf');
     }
 }

@@ -15,7 +15,6 @@ class DownloadController extends Controller
         $dishes = Dish::all()->whereNotNull('price')->sortBy(['menu_number', 'menu_addition'])->groupBy('category');
         $discounts = Deal::join('dishes', 'deals.dish_id', '=', 'dishes.id')->select(['dishes.*', 'deals.price as discount_price'])->get();
 
-        // replace dishes without menu number with na
         $dishes = $dishes->map(function ($category) {
             return $category->map(function ($dish) {
                 if (empty($dish->menu_number)) {

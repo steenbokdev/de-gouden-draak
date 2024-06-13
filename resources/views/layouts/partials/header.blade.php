@@ -25,13 +25,16 @@
                                   label="{{ __('header.routes.dishes') }}"/>
 
             <x-header.navbar-item route="{{ route('deals.index') }}"
-                                  label="{{ __('dish/deal.page_title') }}"/>
+                                  label="{{ __('header.routes.deals') }}"/>
 
             <x-header.navbar-item route="{{ route('cocktail.index') }}"
                                   label="{{ __('header.routes.cocktail') }}"/>
         </div>
 
         <div class="navbar-end">
+            <a class="navbar-item">
+                @include('layouts.partials.lang')
+            </a>
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
                     <span class="icon-text">

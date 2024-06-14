@@ -97,8 +97,8 @@
                                         &euro; {{ $dish->price }}
                                     </s>
                                     &euro; {{ $dish->discount_price }}
-                                    @else
-                                        &euro; {{ $dish->price }}
+                                @else
+                                    &euro; {{ $dish->price }}
                                 @endif
                             @endisset
                         </td>

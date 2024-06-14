@@ -23,14 +23,14 @@
                     <option disabled selected>
                         {{ __('dish/index.category') }}
                     </option>
-
+    
                     @foreach ($categories['collection'] as $category)
                         <option value="{{ $category }}" @selected($category === $categories['selected'])>
                             {{ $category }}
                         </option>
                     @endforeach
                 </x-form.select>
-    
+
                 <div class="control">
                     <button type="submit" class="button is-primary">
                         {{ __('dish/index.apply') }}

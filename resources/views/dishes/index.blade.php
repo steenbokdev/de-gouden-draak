@@ -5,6 +5,7 @@
 @section('addons')
     <form action="{{ route('download.menu') }}" method="POST">
         @csrf
+        @method('POST')
 
         <button type="submit" class="button is-link is-outlined">
             {{ __('dish/index.download_menu') }}

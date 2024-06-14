@@ -1,5 +1,5 @@
 <h1>
-    Het menu van De Gouden Draak
+    {{ __('menu/download.title') }}
 </h1>
 
 @foreach($dishes as $category => $group)
@@ -7,7 +7,7 @@
         @if($category)
             {{ str($category)->upper() }}
         @else
-            GEEN CATEGORIE
+            {{ __('menu/download.no_category') }}
         @endif
     </h3>
 
@@ -23,7 +23,7 @@
     <div style="page-break-before: always;"></div>
 
     <h1>
-        Aanbiedingen
+        {{ __('menu/download.discounts') }}
     </h1>
 
     @foreach($discounts as $discount)

@@ -18,9 +18,6 @@ class DownloadController extends Controller
                 if (empty($dish->menu_number)) {
                     $dish->menu_number = 'N/A';
                 }
-                if (empty($dish->menu_addition)) {
-                    $dish->menu_addition = '';
-                }
                 return $dish;
             });
         })->toArray();

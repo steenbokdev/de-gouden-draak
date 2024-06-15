@@ -17,3 +17,39 @@ body {
     white-space: nowrap;
     animation: marquee 10s linear infinite;
 }
+
+.main-table {
+    padding: 5px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-row {
+    height: 50px;
+    background-color: red;
+}
+
+.table-cell {
+    text-align: center;
+    width: 30%;
+    color: yellow;
+    font-size: 30px;
+}
+
+.table-cell img {
+    vertical-align: middle;
+}
+
+.table-cell span {
+    vertical-align: middle;
+}
+
+.marquee-container {
+    overflow: hidden;
+}
+
+.marquee-container a {
+    color: yellow;
+    font-weight: bold;
+    text-decoration: none;
+}

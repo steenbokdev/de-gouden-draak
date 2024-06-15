@@ -15,7 +15,7 @@ class TabletUserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!str_starts_with($request->user()->employee_id, 'tablet_')) {
+        if (!$request->user() || !str_starts_with($request->user()->employee_id, 'tablet_')) {
             return redirect()->route('home');
         }
 

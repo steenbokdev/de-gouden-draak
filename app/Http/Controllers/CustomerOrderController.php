@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Dish;
+use App\Models\TabletOrder;
+use App\Models\TabletOrderLines;
 use Illuminate\Http\Request;
 
 class CustomerOrderController extends Controller
@@ -43,6 +45,32 @@ class CustomerOrderController extends Controller
 
     public function store(StoreOrderRequest $request)
     {
-        dd($request->all());
+        $validated = $request->validated();
+
+        $tablet_id = str_replace('tablet_', '', auth()->user()->employee_id);
+        $round = TabletOrder::where('tablet_id', $tablet_id)
+                ->whereDate('order_time', today())
+                ->max('round') + 1;
+
+        $order = TabletOrder::create([
+            'tablet_id' => $tablet_id,
+            'round' => $round ?? 1,
+            'order_time' => now()
+        ]);
+
+        foreach ($validated['dishes'] as $dish) {
+            $dishObject = Json_decode($dish);
+            $dishModel = Dish::find($dishObject->dish);
+            $price = $dishModel->deals()->get()->isEmpty() ? $dishModel->price : $dishModel->deals()->first()->price;
+
+            TabletOrderLines::create([
+                'tablet_order_id' => $order->id,
+                'dish_id' => $dishObject->dish,
+                'quantity' => $dishObject->amount,
+                'price' => $price
+            ]);
+        }
+
+        return redirect()->route('order.index');
     }
 }

@@ -4,6 +4,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/order-modal.js') }}" defer></script>
+    <script src="{{ asset('js/order.js') }}" defer></script>
 @endpush
 
 @section('addons-left')
@@ -41,7 +42,7 @@
 
 {{--TODO--}}
 @section('addons-right')
-    <button class="js-modal-trigger button is-primary is-outlined" data-target="modal-order">
+    <button id="button-order" class="js-modal-trigger button is-primary is-outlined" data-target="modal-order">
         Bestelling bekijken
     </button>
     <a href="#" class="button is-primary">
@@ -54,7 +55,8 @@
         <div class="modal-content">
             <div class="box">
                 <p>Bestelling bekijken</p>
-                <!-- Your content -->
+                {{--getDishes from order.js--}}
+                <div id="order-dishes"></div>
             </div>
         </div>
 
@@ -120,7 +122,8 @@
                     <td>
                         {{--TODO--}}
                         <p class="control">
-                            <input class="input" style="max-width: fit-content" type="number" placeholder="0">
+                            <input class="input" id="{{ $dish->id }}" name="quantity"
+                                   data-dish="{{ $dish }}" style="max-width: fit-content" type="number" placeholder="0">
                         </p>
                     </td>
                 </tr>

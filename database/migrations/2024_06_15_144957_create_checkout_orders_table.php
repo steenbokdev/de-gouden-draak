@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('checkout_orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dish_id')->constrained();
-            $table->double('price');
-            $table->integer('count');
+            $table->double('price_per_item');
+            $table->integer('item_count');
             $table->timestamps();
         });
     }

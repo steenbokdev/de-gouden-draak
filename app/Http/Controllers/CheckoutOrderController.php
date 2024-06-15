@@ -30,8 +30,8 @@ class CheckoutOrderController extends Controller
         foreach ($orderData as $orderItem) {
             CheckoutOrder::create([
                 'dish_id' => $orderItem['dishId'],
-                'price' => $orderItem['price'],
-                'count' => $orderItem['count'],
+                'price_per_item' => $orderItem['price'],
+                'item_count' => $orderItem['count'],
             ]);
         }
 

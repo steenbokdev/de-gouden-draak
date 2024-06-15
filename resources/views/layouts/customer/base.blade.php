@@ -20,8 +20,7 @@
 
 <div class="content">
     @include('layouts.customer.partials.header')
-    @include('layouts.customer.partials.content')
-    @yield('content')
+    @include('layouts.customer.partials.main')
 </div>
 
 </body>

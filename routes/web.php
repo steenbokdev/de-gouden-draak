@@ -18,7 +18,18 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
 
     Route::post('/language-switch', [LanguageController::class, 'switch'])->name('language.switch');
 
-    Route::get('/test', function () {
-        return view('home');
-    })->name('test');
+    Route::prefix('customer')->name('customer.')->group(function () {
+        Route::get('/index', function () {
+            return view('customer.index');
+        })->name('index');
+        Route::get('/contact', function () {
+            return view('customer.contact');
+        })->name('contact');
+        Route::get('/menu', function () {
+            return view('customer.menu');
+        })->name('menu');
+        Route::get('/news', function () {
+            return view('customer.news');
+        })->name('news');
+    });
 });

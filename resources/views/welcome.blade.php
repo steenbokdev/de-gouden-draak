@@ -1,9 +1,9 @@
 @extends('layouts.base', [
-    'title' => 'Index'
+    'title' => 'customer.index'
 ])
 
 @section('content')
-<span class="icon-text">
+    <span class="icon-text">
     <span class="is-size-4">
         {{ __('welcome.welcome') }}
     </span>

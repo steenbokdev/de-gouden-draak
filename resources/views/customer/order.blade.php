@@ -54,8 +54,6 @@
 
         <div class="modal-content">
             <div class="box">
-                <p>Bestelling bekijken</p>
-                {{--getDishes from order.js--}}
                 <div id="order-dishes"></div>
             </div>
         </div>
@@ -120,7 +118,6 @@
                         {{ $dish->description }}
                     </td>
                     <td>
-                        {{--TODO--}}
                         <p class="control">
                             <input class="input" id="{{ $dish->id }}" name="quantity"
                                    data-dish="{{ $dish }}" style="max-width: fit-content" type="number" placeholder="0">

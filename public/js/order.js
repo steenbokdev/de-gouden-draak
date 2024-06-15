@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementsByName('quantity').forEach((quantity) => {
+    let allQuantityInputs = document.getElementsByName('quantity');
+    allQuantityInputs.forEach((quantity) => {
         quantity.addEventListener('change', (event) => {
             amount = event.target.value;
             dish = event.target.dataset.dish;
@@ -27,7 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('button-order').addEventListener('click', () => {
         let content = document.getElementById('order-dishes');
+        content.innerHTML = '';
         getDishes().forEach((dish) => {
+            allQuantityInputs.forEach((quantity) => {
+                dishObject = JSON.parse(quantity.dataset.dish);
+                if (dishObject['id'] == dish['dish']) {
+                    content.innerHTML += `<p>${dishObject['name']} x ${dish['amount']}</p>`;
+                }
+            });
         });
     });
 
@@ -41,8 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 dishes.push({dish: dish, amount: amount});
             }
         });
-
-        console.log(dishes);
 
         return dishes;
     }

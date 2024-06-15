@@ -1,3 +1,4 @@
+@include('layouts.partials.lang')
 <table id="main_table" class="main-table">
     <tr class="table-row">
         <td class="table-cell">

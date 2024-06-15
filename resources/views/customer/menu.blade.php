@@ -1,5 +1,6 @@
 @extends('layouts.customer.base')
 
 @section('content')
-    TODO: Linde, Voeg hier de inhoud van de menukaart toe. (perhaps de pdf?)
+    <iframe src="{{ route('download.menu.show') }}" width="100%" height="500px">
+    </iframe>
 @endsection

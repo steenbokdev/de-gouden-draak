@@ -35,7 +35,7 @@
     <tr class="nav-row">
         <td class="nav-cell">
         </td>
-        <td class="nav-content-cell"><br>
+        <td class="nav-content-cell">
             @yield('content')
         </td>
         <td class="nav-cell">

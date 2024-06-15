@@ -18,6 +18,7 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
 
     Route::post('/download-menu', [DownloadController::class, 'index'])->name('download.menu');
+    Route::get('/download-menu/show', [DownloadController::class, 'show'])->name('download.menu.show');
 
     Route::post('/language-switch', [LanguageController::class, 'switch'])->name('language.switch');
 

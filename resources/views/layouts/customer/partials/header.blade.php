@@ -7,9 +7,8 @@
             <img style="vertical-align: middle;" src="{{ asset('images/dragon-small-flipped.png') }}"
                  alt="Golden Dragon" height="50px">
         </td>
-        <td>
-            <a href="#" style="color:yellow;font-weight:bold;text-decoration: none;overflow: hidden">
-                {{--TODO: Linde--}}
+        <td style="overflow: hidden">
+            <a href="#" style="color:yellow;font-weight:bold;text-decoration: none;">
                 <div class="marquee">
                     Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!
                 </div>

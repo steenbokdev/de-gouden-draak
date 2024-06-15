@@ -6,6 +6,8 @@ return [
         'cocktail' => 'Cocktails',
         'dishes' => 'Dishes',
         'deals' => 'Deals',
+        'login' => 'Login',
         'logout' => 'Logout'
-    ]
+    ],
+    'greet' => 'Hello'
 ];

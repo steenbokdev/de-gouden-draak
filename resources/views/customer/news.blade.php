@@ -2,9 +2,9 @@
 
 @section('content')
     <h3>
-        Door de Corona crisis is De Gouden Draak op het moment slechts beperkt open.
+        {{ __('customer/news.title') }}
         <br>
-        Het restaurant-gedeelte is gesloten. U kan uw favoriete gerechten nog wel afhalen.
+        {{ __('customer/news.sub_title') }}
     </h3>
     <br>
 @endsection

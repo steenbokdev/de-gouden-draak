@@ -6,9 +6,9 @@
             <img src="{{ asset('images/dragon-small-flipped.png') }}" alt="Golden Dragon" height="50px">
         </td>
         <td class="marquee-container">
-            <a href="#">
+            <a href="{{ route('customer.index') }}">
                 <div class="marquee">
-                    Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!
+                    {{ __('customer/layout.header.marquee') }}
                 </div>
             </a>
         </td>

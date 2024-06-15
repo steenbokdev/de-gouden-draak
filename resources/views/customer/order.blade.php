@@ -2,6 +2,10 @@
     'title' => __('customer/order.page_title') . ' - ' . auth()->user()->firstname
 ])
 
+@push('scripts')
+    <script src="{{ asset('js/order-modal.js') }}" defer></script>
+@endpush
+
 @section('addons-left')
     <form action="{{ route('order.index') }}" method="GET">
         <div class="field is-grouped">
@@ -37,12 +41,25 @@
 
 {{--TODO--}}
 @section('addons-right')
-    <a href="#" class="button is-outlined is-primary">
+    <button class="js-modal-trigger button is-primary is-outlined" data-target="modal-order">
         Bestelling bekijken
-    </a>
+    </button>
     <a href="#" class="button is-primary">
         Bestelling plaatsen
     </a>
+
+    <div id="modal-order" class="modal">
+        <div class="modal-background"></div>
+
+        <div class="modal-content">
+            <div class="box">
+                <p>Bestelling bekijken</p>
+                <!-- Your content -->
+            </div>
+        </div>
+
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
 @endsection
 
 @section('content')

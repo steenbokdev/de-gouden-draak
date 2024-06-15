@@ -12,9 +12,14 @@
     </h3>
 
     @foreach($group as $dish)
-        {{ $dish['menu_number'] }}{{ $dish['menu_addition'] }}. {{ $dish['name'] }} @if($dish['description'])
+        {{ $dish['menu_number'] . $dish['menu_addition'] }}. {{ $dish['name'] }}
+
+        @if($dish['description'])
             <i>({{ $dish['description'] }})</i>
-        @endif - &euro; {{ $dish['price'] }}
+        @endif
+
+        - &euro; {{ $dish['price'] }}
+
         <br>
     @endforeach
 @endforeach
@@ -27,11 +32,18 @@
     </h1>
 
     @foreach($discounts as $discount)
-        {{ $discount['menu_number'] }}{{ $discount['menu_addition'] }}. {{ $discount['name'] }} @if($dish['description'])
+        {{ $discount['menu_number'] . $discount['menu_addition'] }}. {{ $discount['name'] }}
+
+        @if($dish['description'])
             <i>({{ $dish['description'] }})</i>
-        @endif - <s>&euro; {{ $discount['price'] }}</s> &euro; {{ $discount['discount_price'] }}
+        @endif
+
+        - <s>
+            &euro; {{ $discount['price'] }}
+        </s>
+
+        &euro; {{ $discount['discount_price'] }}
+
         <br>
     @endforeach
 @endif
-
-

@@ -76,11 +76,12 @@
         </div>
 
         <div class="column">
-            <form action="" method="post">
+            <form action="{{ route('checkout.store') }}" method="post">
                 @csrf
                 @method('POST')
 
                 <div id="checkout-container" class="p-3 mb-3 max-h-500 overflow-y"></div>
+                <input type="hidden" id="order-data" name="order-data">
 
                 <button id="submit-order" type="submit" class="button is-primary is-fullwidth">
                     {{ __('checkout/index.checkout') }}

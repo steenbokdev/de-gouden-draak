@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
             checkoutContent.addDish(dish);
         });
     });
+
+    document.getElementById('submit-order').addEventListener('click', (e) => {
+        document.getElementById('order-data').value = JSON.stringify(checkoutContent.items);
+    });
 });
 
 class Dish {
@@ -64,8 +68,6 @@ class CheckoutContent {
             orderItem.incrementCount();
             this.updateCheckoutItem(orderItem);
         }
-
-        console.log(`Dish: ${dish.dishName}, Count: ${orderItem.count}, Price: $${dish.price}`);
     }
 
     createCheckoutItem(orderItem) {
@@ -77,7 +79,7 @@ class CheckoutContent {
         const counter = document.getElementById(`counter-${orderItem.dishId}`);
         const totalPrice = document.getElementById(`total-${orderItem.dishId}`);
         counter.innerText = orderItem.count;
-        totalPrice.innerText = `Total: $${orderItem.getTotalPrice()}`;
+        totalPrice.innerHTML = `&euro; ${orderItem.getTotalPrice()}`;
     }
 
     createCard(orderItem) {
@@ -95,7 +97,7 @@ class CheckoutContent {
 
         const totalPrice = document.createElement('p');
         totalPrice.id = `total-${orderItem.dishId}`;
-        totalPrice.innerText = `Total: $${orderItem.getTotalPrice()}`;
+        totalPrice.innerHTML = `&euro; ${orderItem.getTotalPrice()}`;
 
         content.append(totalPrice);
         cardContent.append(content, controls);

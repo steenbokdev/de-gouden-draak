@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CheckoutOrder;
 use App\Models\Dish;
+use Illuminate\Http\Request;
 
 class CheckoutOrderController extends Controller
 {
@@ -16,5 +18,23 @@ class CheckoutOrderController extends Controller
         return view('order.checkout.index', [
             'dishes' => $dishes
         ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $orderData = json_decode($request->input('order-data'), true);
+
+        foreach ($orderData as $orderItem) {
+            CheckoutOrder::create([
+                'dish_id' => $orderItem['dishId'],
+                'price' => $orderItem['price'],
+                'count' => $orderItem['count'],
+            ]);
+        }
+
+        return redirect()->back();
     }
 }

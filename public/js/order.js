@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // get only menu_number, menu_addition, name and price from the dish
             let dishId = JSON.parse(dish).id;
 
+            if (amount === '0') {
+                localStorage.removeItem('dish-' + dishId);
+                return;
+            }
+
             if (localStorage.getItem('dish-' + dishId) !== null) {
                 localStorage.setItem('dish-' + dishId, amount);
             } else {

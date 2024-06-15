@@ -30,6 +30,9 @@
 
                 <x-header.navbar-item route="{{ route('deals.index') }}"
                                       label="{{ __('header.routes.deals') }}"/>
+
+                <x-header.navbar-item route="{{ route('checkout.index') }}"
+                                      label="{{ __('header.routes.checkout') }}"/>
             @endauth
         </div>
 

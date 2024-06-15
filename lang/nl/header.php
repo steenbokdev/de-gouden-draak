@@ -6,6 +6,7 @@ return [
         'cocktail' => 'Cocktails',
         'dishes' => 'Gerechten',
         'deals' => 'Aanbiedingen',
+        'checkout' => 'Kassa bestelling',
         'login' => 'Log in',
         'logout' => 'Log uit'
     ],

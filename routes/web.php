@@ -17,4 +17,8 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
 
     Route::post('/language-switch', [LanguageController::class, 'switch'])->name('language.switch');
+
+    Route::get('/test', function () {
+        return view('home');
+    })->name('test');
 });

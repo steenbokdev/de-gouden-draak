@@ -50,6 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        console.log(dishes);
+
         return dishes;
     }
+
+    document.getElementById('place-order-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        let form = event.target;
+        let dishes = getDishes();
+        dishes.forEach((dish, index) => {
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `dishes[${index}]`;
+            input.value = JSON.stringify(dish);
+            form.appendChild(input);
+        });
+        form.submit();
+    });
 });

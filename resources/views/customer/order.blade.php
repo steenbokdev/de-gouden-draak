@@ -45,9 +45,14 @@
     <button id="button-order" class="js-modal-trigger button is-primary is-outlined" data-target="modal-order">
         Bestelling bekijken
     </button>
-    <a href="#" class="button is-primary">
-        Bestelling plaatsen
-    </a>
+    <form id="place-order-form" action="{{ route('order.store') }}" method="post">
+        @csrf
+        @method('POST')
+
+        <button type="submit" id="place-order-button" class="button is-primary">
+            Bestelling plaatsen
+        </button>
+    </form>
 
     <div id="modal-order" class="modal">
         <div class="modal-background"></div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrderRequest;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,8 @@ class CustomerOrderController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StoreOrderRequest $request)
     {
-        //
+        dd($request->all());
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\DealController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\LoginController;
 use App\Http\Middleware\LanguageMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         return view('welcome');
     })->name('home');
 
+    Route::get('login', [LoginController::class, 'login'])->name('login');
+    Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
     Route::resource('cocktail', CocktailController::class)->only(['index']);
-    Route::resource('dishes', DishController::class)->except(['show']);
-    Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
 
     Route::prefix('download-menu')->name('download.menu.')->group(function () {
         Route::post('/', [DownloadController::class, 'index'])->name('index');
@@ -39,5 +42,10 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         Route::get('/news', function () {
             return view('customer.news');
         })->name('news');
+    });
+    
+    Route::middleware('auth')->group(function () {
+        Route::resource('dishes', DishController::class)->except(['show']);
+        Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
     });
 });

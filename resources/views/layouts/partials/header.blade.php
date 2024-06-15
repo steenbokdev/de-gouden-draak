@@ -31,6 +31,12 @@
                 <x-header.navbar-item route="{{ route('deals.index') }}"
                                       label="{{ __('header.routes.deals') }}"/>
             @endauth
+            {{--TODO: Onderscheid maken tablet + employee--}}
+            @auth()
+                <x-header.navbar-item route="{{ route('order.index') }}"
+                                      label="{{ __('header.routes.order') }}"/>
+
+            @endauth
         </div>
 
         <div class="navbar-end">

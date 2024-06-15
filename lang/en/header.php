@@ -6,6 +6,7 @@ return [
         'cocktail' => 'Cocktails',
         'dishes' => 'Dishes',
         'deals' => 'Deals',
+        'order' => 'Place order',
         'login' => 'Login',
         'login_tablet' => 'Tablet Login',
         'logout' => 'Logout'

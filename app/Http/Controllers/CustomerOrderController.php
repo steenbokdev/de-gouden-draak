@@ -52,6 +52,8 @@ class CustomerOrderController extends Controller
                 ->whereDate('order_time', today())
                 ->max('round') + 1;
 
+        // TODO: Check round for the day
+
         $order = TabletOrder::create([
             'tablet_id' => $tablet_id,
             'round' => $round ?? 1,

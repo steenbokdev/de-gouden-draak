@@ -3,7 +3,7 @@
 ])
 
 @section('addons')
-    <form action="{{ route('download.menu') }}" method="POST">
+    <form action="{{ route('download.menu.index') }}" method="POST">
         @csrf
         @method('POST')
 
@@ -23,7 +23,7 @@
                     <option disabled selected>
                         {{ __('dish/index.category') }}
                     </option>
-    
+
                     @foreach ($categories['collection'] as $category)
                         <option value="{{ $category }}" @selected($category === $categories['selected'])>
                             {{ $category }}

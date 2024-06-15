@@ -10,6 +10,18 @@ class DownloadController extends Controller
 {
     public function index()
     {
+        $pdf = $this->makePdf();
+        return $pdf->download('menu-de-gouden-draak-' . date('Ymd') . '.pdf');
+    }
+
+    public function show()
+    {
+        $pdf = $this->makePdf();
+        return $pdf->stream();
+    }
+
+    private function makePdf()
+    {
         $dishes = Dish::all()->whereNotNull('price')->sortBy(['menu_number', 'menu_addition'])->groupBy('category');
         $discounts = Deal::join('dishes', 'deals.dish_id', '=', 'dishes.id')->select(['dishes.*', 'deals.price as discount_price'])->get();
 
@@ -24,6 +36,7 @@ class DownloadController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML(view('menu_pdf', ['dishes' => $dishes, 'discounts' => $discounts])->render());
-        return $pdf->download('menu-de-gouden-draak-' . date('Ymd') . '.pdf');
+
+        return $pdf;
     }
 }

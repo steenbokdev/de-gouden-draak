@@ -39,15 +39,28 @@ class CustomerOrderController extends Controller
             'categories' => [
                 'collection' => $categories,
                 'selected' => $categoryQuery
-            ]
+            ],
+            'round' => $this->getRound($this->getTabletId())
         ]);
+    }
+
+    private function getTabletId()
+    {
+        return str_replace('tablet_', '', auth()->user()->employee_id);
+    }
+
+    private function getRound($tablet_id)
+    {
+        return TabletOrder::where('tablet_id', $tablet_id)
+            ->whereDate('order_time', today())
+            ->max('round') ?? 1;
     }
 
     public function store(StoreOrderRequest $request)
     {
         $validated = $request->validated();
 
-        $tablet_id = str_replace('tablet_', '', auth()->user()->employee_id);
+        $tablet_id = $this->getTabletId();
         $round = TabletOrder::where('tablet_id', $tablet_id)
                 ->whereDate('order_time', today())
                 ->max('round') + 1;

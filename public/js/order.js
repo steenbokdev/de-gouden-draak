@@ -1,71 +1,88 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let allQuantityInputs = document.getElementsByName('quantity');
-    allQuantityInputs.forEach((quantity) => {
-        quantity.addEventListener('change', (event) => {
-            amount = event.target.value;
-            dish = event.target.dataset.dish;
-            // get only menu_number, menu_addition, name and price from the dish
-            let dishId = JSON.parse(dish).id;
+class DishManager {
+    constructor() {
+        this.allQuantityInputs = document.getElementsByName('quantity');
+        this.initQuantityInputs();
+        this.initOrderButton();
+        this.initOrderForm();
+    }
 
-            if (amount === '0') {
-                localStorage.removeItem('dish-' + dishId);
-                return;
-            }
-
-            if (localStorage.getItem('dish-' + dishId) !== null) {
-                localStorage.setItem('dish-' + dishId, amount);
-            } else {
-                localStorage.setItem('dish-' + dishId, amount);
-            }
+    initQuantityInputs() {
+        this.allQuantityInputs.forEach(quantity => {
+            quantity.addEventListener('change', (event) => this.handleQuantityChange(event));
+            this.setInitialQuantity(quantity);
         });
+    }
 
-        // Set the quantity to the value stored in localStorage
-        let dishId = JSON.parse(quantity.dataset.dish).id;
-        if (localStorage.getItem('dish-' + dishId) !== null) {
-            quantity.value = localStorage.getItem('dish-' + dishId);
+    handleQuantityChange(event) {
+        const amount = event.target.value;
+        const dish = JSON.parse(event.target.dataset.dish);
+        const dishId = dish.id;
+
+        if (amount === '0') {
+            localStorage.removeItem(`dish-${dishId}`);
+        } else {
+            localStorage.setItem(`dish-${dishId}`, amount);
         }
-    });
+    }
 
-    document.getElementById('button-order').addEventListener('click', () => {
-        let content = document.getElementById('order-dishes');
+    setInitialQuantity(quantity) {
+        const dishId = JSON.parse(quantity.dataset.dish).id;
+        const storedAmount = localStorage.getItem(`dish-${dishId}`);
+        if (storedAmount !== null) {
+            quantity.value = storedAmount;
+        }
+    }
+
+    initOrderButton() {
+        document.getElementById('button-order').addEventListener('click', () => this.updateOrderSummary());
+    }
+
+    updateOrderSummary() {
+        const content = document.getElementById('order-dishes');
         content.innerHTML = '';
-        getDishes().forEach((dish) => {
-            allQuantityInputs.forEach((quantity) => {
-                dishObject = JSON.parse(quantity.dataset.dish);
-                if (dishObject['id'] == dish['dish']) {
-                    content.innerHTML += `<p>${dishObject['name']} x ${dish['amount']}</p>`;
+        const dishes = this.getDishes();
+        dishes.forEach(dish => {
+            this.allQuantityInputs.forEach(quantity => {
+                const dishObject = JSON.parse(quantity.dataset.dish);
+                if (dishObject.id == dish.dish) {
+                    content.innerHTML += `<p>${dishObject.name} x ${dish.amount}</p>`;
                 }
             });
         });
-    });
+    }
 
-    function getDishes() {
-        let dishes = [];
-        let keys = Object.keys(localStorage);
-        keys.forEach((key) => {
-            if (key.includes('dish-')) {
-                let dish = key.split('-')[1];
-                let amount = localStorage.getItem(key);
-                dishes.push({dish: dish, amount: amount});
+    getDishes() {
+        const dishes = [];
+        const keys = Object.keys(localStorage);
+        keys.forEach(key => {
+            if (key.startsWith('dish-')) {
+                const dishId = key.split('-')[1];
+                const amount = localStorage.getItem(key);
+                dishes.push({dish: dishId, amount: amount});
             }
         });
-
-        console.log(dishes);
-
         return dishes;
     }
 
-    document.getElementById('place-order-form').addEventListener('submit', function (event) {
+    initOrderForm() {
+        document.getElementById('place-order-form').addEventListener('submit', (event) => this.handleOrderFormSubmit(event));
+    }
+
+    handleOrderFormSubmit(event) {
         event.preventDefault();
-        let form = event.target;
-        let dishes = getDishes();
+        const form = event.target;
+        const dishes = this.getDishes();
         dishes.forEach((dish, index) => {
-            let input = document.createElement('input');
+            const input = document.createElement('input');
             input.type = 'hidden';
             input.name = `dishes[${index}]`;
             input.value = JSON.stringify(dish);
             form.appendChild(input);
         });
         form.submit();
-    });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new DishManager();
 });

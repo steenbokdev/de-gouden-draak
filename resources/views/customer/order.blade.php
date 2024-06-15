@@ -40,17 +40,16 @@
     </form>
 @endsection
 
-{{--TODO--}}
 @section('addons-right')
     <button id="button-order" class="js-modal-trigger button is-primary is-outlined" data-target="modal-order">
-        Bestelling bekijken
+        {{ __('customer/order.order_watch') }}
     </button>
     <form id="place-order-form" action="{{ route('order.store') }}" method="post">
         @csrf
         @method('POST')
 
         <button type="submit" id="place-order-button" class="button is-primary">
-            Bestelling plaatsen
+            {{ __('customer/order.place_order') }}
         </button>
     </form>
 
@@ -68,6 +67,9 @@
 @endsection
 
 @section('content')
+    <h4>
+        {{ __('customer/order.round', ['round' => $round]) }}
+    </h4>
     <div class="table-container">
         <table class="table is-striped is-narrow is-hoverable is-fullwidth">
             <thead>

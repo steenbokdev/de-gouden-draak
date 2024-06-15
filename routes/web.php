@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CocktailController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\DownloadController;
@@ -25,9 +26,7 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     Route::post('/language-switch', [LanguageController::class, 'switch'])->name('language.switch');
 
     Route::prefix('customer')->name('customer.')->group(function () {
-        Route::get('/index', function () {
-            return view('customer.index');
-        })->name('index');
+        Route::get('/index', [CustomerController::class, 'index'])->name('index');
         Route::get('/contact', function () {
             return view('customer.contact');
         })->name('contact');

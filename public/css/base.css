@@ -109,3 +109,90 @@ body {
     font-size: 20px;
     color: white;
 }
+
+.tr-padding {
+    height: 7px;
+    background-color: red;
+}
+
+.tr-base {
+    height: 25px;
+    background-color: red;
+}
+
+.td-padding {
+    width: 7px;
+}
+
+.td-left-top {
+    width: 25px;
+    border-left: 4px solid yellow;
+    border-top: 4px solid yellow;
+}
+
+.td-right-top {
+    width: 25px;
+    border-right: 4px solid yellow;
+    border-top: 4px solid yellow;
+}
+
+.td-right-bottom {
+    width: 25px;
+    border-right: 4px solid yellow;
+    border-bottom: 4px solid yellow;
+}
+
+.td-top-bottom {
+    border-top: 4px solid yellow;
+    border-bottom: 4px solid yellow;
+}
+
+.td-left-bottom {
+    width: 25px;
+    border-left: 4px solid yellow;
+    border-bottom: 4px solid yellow;
+}
+
+.td-all {
+    width: 25px;
+    border: 4px solid yellow;
+}
+
+.td-none {
+    width: 25px;
+}
+
+.td-bottom {
+    width: 25px;
+    border-bottom: 4px solid yellow;
+}
+
+.td-right-left {
+    width: 25px;
+    border-right: 4px solid yellow;
+    border-left: 4px solid yellow;
+}
+
+.center {
+    text-align: center;
+}
+
+.a-style {
+    color: yellow;
+    text-decoration: none;
+}
+
+.td-top {
+    width: 25px;
+    border-top: 4px solid yellow;
+}
+
+.td-right {
+    width: 25px;
+    border-right: 4px solid yellow;
+}
+
+.td-left {
+    width: 25px;
+    border-left: 4px solid yellow;
+}

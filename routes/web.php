@@ -31,6 +31,9 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         Route::get('/contact', function () {
             return view('customer.contact');
         })->name('contact');
+        Route::get('/contact-new', function () {
+            return view('customer.contact-new');
+        })->name('contact.new');
         Route::get('/menu', function () {
             return view('customer.menu');
         })->name('menu');

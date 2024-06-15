@@ -43,8 +43,9 @@
         <td style="width:25px;"></td>
         <td style="text-align:center">
             @include('layouts.customer.partials.nav')
-            {{--TODO: Linde--}}
-            <div style="text-align:center"><a href="{{ route('customer.contact') }}">Naar Contact</a></div>
+            <div style="text-align:center">
+                <a style="color: yellow;text-decoration: none;" href="{{ route('customer.contact.new') }}">Naar Contact</a>
+            </div>
         </td>
         <td style="width:25px;"></td>
         <td style="width:25px;"></td>

@@ -17,7 +17,7 @@
         <td style="width:50px">
         </td>
         <td>
-            <img src="{{ asset('images/map.png') }}" width="100%" alt="Maps">
+            {{--Maps API--}}
         </td>
         <td style="width:50px">
         </td>

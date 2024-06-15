@@ -2,6 +2,17 @@
     'title' => __('dish/index.page_title')
 ])
 
+@section('addons')
+    <form action="{{ route('download.menu') }}" method="POST">
+        @csrf
+        @method('POST')
+
+        <button type="submit" class="button is-link is-outlined">
+            {{ __('dish/index.download_menu') }}
+        </button>
+    </form>
+@endsection
+
 @section('addons-left')
     <form action="{{ route('dishes.index') }}" method="GET">
         <div class="field is-grouped">
@@ -19,7 +30,7 @@
                         </option>
                     @endforeach
                 </x-form.select>
-    
+
                 <div class="control">
                     <button type="submit" class="button is-primary">
                         {{ __('dish/index.apply') }}

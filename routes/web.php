@@ -8,6 +8,7 @@ use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\LanguageMiddleware;
+use App\Http\Middleware\TabletUserMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(LanguageMiddleware::class)->group(function () {
@@ -16,7 +17,9 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     })->name('home');
 
     Route::get('login', [LoginController::class, 'login'])->name('login');
+    Route::get('login-tablet', [LoginController::class, 'loginTablet'])->name('login-tablet');
     Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+    Route::post('authenticate-tablet', [LoginController::class, 'authenticateTablet'])->name('authenticate-tablet');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::resource('cocktail', CocktailController::class)->only(['index']);
@@ -42,6 +45,12 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         Route::get('/news', function () {
             return view('customer.news');
         })->name('news');
+    });
+
+    Route::middleware(TabletUserMiddleware::class)->group(function () {
+        Route::get('test', function () {
+            return 'You are a tablet user';
+        })->name('test');
     });
     
     Route::middleware('auth')->group(function () {

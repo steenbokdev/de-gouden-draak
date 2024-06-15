@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
             'password' => 'test',
         ]);
 
+        User::create([
+            'firstname' => 'Tablet 1',
+            'employee_id' => 'tablet_1',
+            'password' => 'test',
+        ]);
+
         $this->call([
             DishSeeder::class
         ]);

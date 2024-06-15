@@ -7,6 +7,7 @@ return [
         'dishes' => 'Dishes',
         'deals' => 'Deals',
         'login' => 'Login',
+        'login_tablet' => 'Tablet Login',
         'logout' => 'Logout'
     ],
     'greet' => 'Hello'

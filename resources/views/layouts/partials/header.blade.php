@@ -73,6 +73,11 @@
                     </div>
                 </div>
             @else
+                <a href="{{ route('login-tablet') }}" class="navbar-item">
+                    <button class="button is-primary is-outlined">
+                        {{ __('header.routes.login_tablet') }}
+                    </button>
+                </a>
                 <a href="{{ route('login') }}" class="navbar-item">
                     <button class="button is-primary">
                         {{ __('header.routes.login') }}

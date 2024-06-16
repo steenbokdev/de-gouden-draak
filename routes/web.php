@@ -50,6 +50,7 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         Route::resource('dishes', DishController::class)->except(['show']);
         Route::resource('checkout', CheckoutOrderController::class)->only(['index', 'store']);
         Route::resource('sales', SalesController::class)->only(['index']);
+        Route::post('sales/download', [SalesController::class, 'download'])->name('sales.download');
         Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
     });
 });

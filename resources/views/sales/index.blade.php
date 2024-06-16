@@ -2,6 +2,31 @@
     'title' => __('sales/index.page_title')
 ])
 
+@section('addons')
+    <form action="{{ route('sales.download') }}" method="POST">
+        @csrf
+        @method('POST')
+
+        <div class="field is-grouped">
+            <x-form.select id="sale_date" label="{{ __('sales/index.select_day') }}">
+                @forelse ($days as $day)
+                    <option value="{{ $day }}">
+                        {{ $day }}
+                    </option>
+                @empty
+                    
+                @endforelse
+            </x-form.select>
+
+            <div class="field">
+                <button type="submit" class="button is-primary">
+                    {{ __('sales/index.download') }}
+                </button>
+            </div>
+        </div>
+    </form>
+@endsection
+
 @section('addons-left')
     <form action="{{ route('sales.index') }}" method="GET">
         <div class="field is-grouped">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Notification;
 use App\Models\CheckoutOrder;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
@@ -65,6 +66,16 @@ class SalesController extends Controller
     public function receipt()
     {
         $latest = CheckoutOrder::all('created_at')->sortByDesc('created_at')->first();
+
+        if ($latest === null) {
+            return redirect()->back()->with([
+                'notification' => [
+                    'type' => Notification::Danger,
+                    'body' => __('sales/download.no_orders')
+                ]
+            ]);
+        }
+
         $sales = CheckoutOrder::where('created_at', $latest->created_at)->get();
         $totalPrice = $sales->sum(function ($sale) {
             return $sale->price_per_item * $sale->item_count;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Notification;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Dish;
@@ -82,38 +83,83 @@ class CustomerOrderController extends Controller
     private function getRound($tablet_id)
     {
         return TabletOrder::where('tablet_id', $tablet_id)
-            ->whereDate('order_time', today())
-            ->max('round') + 1;
-    }
-
-    public function store(StoreOrderRequest $request)
-    {
-        $validated = $request->validated();
-
-        $tablet_id = $this->getTabletId();
-        $round = TabletOrder::where('tablet_id', $tablet_id)
                 ->whereDate('order_time', today())
                 ->max('round') + 1;
+    }
+
+    public function store(Request $request)
+    {
+        $orderData = collect();
+        foreach ($request->input('dishes') as $dish) {
+            $dishObj = json_decode($dish, true);
+            $orderData->push([
+                'dishId' => $dishObj['dish'],
+                'count' => $dishObj['amount'],
+            ]);
+        }
+
+        if ($orderData->isEmpty()) {
+            return redirect()->back()->with([
+                'notification' => [
+                    'type' => Notification::Danger,
+                    'body' => __('customer/order.validation.dishes.required')
+                ]
+            ]);
+        }
+
+        foreach ($orderData as $orderItem) {
+            if ($orderItem['count'] > 10) {
+                return redirect()->back()->with([
+                    'notification' => [
+                        'type' => Notification::Danger,
+                        'body' => __('customer/order.validation.dishes.amount.max')
+                    ]
+                ]);
+            } else if ($orderItem['count'] < 1) {
+                return redirect()->back()->with([
+                    'notification' => [
+                        'type' => Notification::Danger,
+                        'body' => __('customer/order.validation.dishes.amount.min')
+                    ]
+                ]);
+            }
+        }
+
+        if (!$this->canPlaceOrder($this->getTabletId())) {
+            return redirect()->back()->with([
+                'notification' => [
+                    'type' => Notification::Danger,
+                    'body' => __('customer/order.validation.order_time')
+                ]
+            ]);
+        }
+
+        $tablet_id = $this->getTabletId();
+        $round = $this->getRound($tablet_id);
 
         $order = TabletOrder::create([
             'tablet_id' => $tablet_id,
-            'round' => $round ?? 1,
+            'round' => $round,
             'order_time' => now()
         ]);
 
-        foreach ($validated['dishes'] as $dish) {
-            $dishObject = Json_decode($dish);
-            $dishModel = Dish::find($dishObject->dish);
+        foreach ($orderData as $orderItem) {
+            $dishModel = Dish::where('id', '=', $orderItem['dishId'])->first();
             $price = $dishModel->deals()->get()->isEmpty() ? $dishModel->price : $dishModel->deals()->first()->price;
 
             TabletOrderLines::create([
                 'tablet_order_id' => $order->id,
-                'dish_id' => $dishObject->dish,
-                'quantity' => $dishObject->amount,
+                'dish_id' => $orderItem['dishId'],
+                'quantity' => $orderItem['count'],
                 'price' => $price
             ]);
         }
 
-        return redirect()->route('order.index');
+        return redirect()->route('order.index')->with([
+            'notification' => [
+                'type' => Notification::Success,
+                'body' => __('customer/order.order_success')
+            ]
+        ]);
     }
 }

@@ -17,6 +17,6 @@ return [
                 'min' => 'Je moet minstens 1x het gerecht bestellen',
             ]
         ],
-        'order_time' => 'Je kan maar één keer per 10 minuten een bestelling plaatsen'
+        'order_time_rounds_left' => 'Je kan maar één keer per 10 minuten een bestelling plaatsen of je hebt geen rondes meer over'
     ],
 ];

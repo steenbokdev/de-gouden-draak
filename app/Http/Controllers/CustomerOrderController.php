@@ -18,9 +18,6 @@ class CustomerOrderController extends Controller
 
     public function index()
     {
-        $searchQuery = request()->input('search');
-        $categoryQuery = request()->input('category');
-
         $dishes = Dish::leftjoin('deals', 'dishes.id', '=', 'deals.dish_id')
             ->select('dishes.*', 'deals.price as discount_price')
             ->orderBy('menu_number')
@@ -29,24 +26,12 @@ class CustomerOrderController extends Controller
 
         $categories = Dish::whereNotNull('category')->distinct()->pluck('category')->unique();
 
-        if (isset($categoryQuery)) {
-            $dishes = $dishes->where('category', $categoryQuery);
-        }
-
-        if (isset($searchQuery)) {
-            $dishes = $dishes->where('name', 'like', "%$searchQuery%")
-                ->orWhere('menu_number', 'like', "%$searchQuery%");
-        }
-
         return view('customer.order', [
             'dishes' => $dishes,
-            'searchQuery' => $searchQuery,
             'categories' => [
                 'collection' => $categories,
-                'selected' => $categoryQuery
             ],
-            'round' => $this->getRound($this->getTabletId()),
-            'canPlaceOrder' => $this->canPlaceOrder($this->getTabletId()),
+            'round' => $this->getRound($this->getTabletId())
         ]);
     }
 
@@ -90,7 +75,17 @@ class CustomerOrderController extends Controller
     public function store(Request $request)
     {
         $orderData = collect();
-        foreach ($request->input('dishes') as $dish) {
+        $input = $request->input('dishes');
+        if (!$input) {
+            return redirect()->back()->with([
+                'notification' => [
+                    'type' => Notification::Danger,
+                    'body' => __('customer/order.validation.dishes.required')
+                ]
+            ]);
+        }
+
+        foreach ($input as $dish) {
             $dishObj = json_decode($dish, true);
             $orderData->push([
                 'dishId' => $dishObj['dish'],
@@ -129,7 +124,7 @@ class CustomerOrderController extends Controller
             return redirect()->back()->with([
                 'notification' => [
                     'type' => Notification::Danger,
-                    'body' => __('customer/order.validation.order_time')
+                    'body' => __('customer/order.validation.order_time_rounds_left')
                 ]
             ]);
         }

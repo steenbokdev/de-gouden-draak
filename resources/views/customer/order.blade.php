@@ -26,20 +26,14 @@
 @endsection
 
 @section('addons-right')
-    @if($canPlaceOrder)
-        <form id="place-order-form" action="{{ route('order.store') }}" method="post">
-            @csrf
-            @method('POST')
+    <form id="place-order-form" action="{{ route('order.store') }}" method="post">
+        @csrf
+        @method('POST')
 
-            <button type="submit" id="place-order-button" class="button is-primary">
-                {{ __('customer/order.place_order') }}
-            </button>
-        </form>
-    @else
-        <button class="button is-primary" disabled>
+        <button type="submit" id="place-order-button" class="button is-primary">
             {{ __('customer/order.place_order') }}
         </button>
-    @endif
+    </form>
 @endsection
 
 @section('content')

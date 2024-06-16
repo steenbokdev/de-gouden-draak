@@ -17,6 +17,6 @@ return [
                 'min' => 'You need to order at least 1 per dish',
             ]
         ],
-        'order_time' => 'You can only place an order once per 10 minutes'
+        'order_time_rounds_left' => 'You can only place an order once per 10 minutes or you have no rounds left'
     ],
 ];

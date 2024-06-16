@@ -37,6 +37,9 @@
 
                     <x-header.navbar-item route="{{ route('sales.index') }}"
                                           label="{{ __('header.routes.sales') }}" />
+
+                    <x-header.navbar-item route="{{ route('rounds.index') }}"
+                                          label="{{ __('header.routes.rounds') }}" />
                 @else
                     <x-header.navbar-item route="{{ route('order.index') }}"
                                           label="{{ __('header.routes.order') }}" />

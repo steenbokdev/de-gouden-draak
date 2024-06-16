@@ -69,7 +69,15 @@ class CustomerOrderController extends Controller
 
     private function getRound($tablet_id)
     {
-        return Round::where('tablet_id', $tablet_id)->first();
+        $round = Round::where('tablet_id', $tablet_id)->first();
+        if (!$round) {
+            return Round::create([
+                'tablet_id' => $tablet_id,
+                'round' => 1
+            ]);
+        }
+
+        return $round;
     }
 
     public function store(Request $request)
@@ -154,11 +162,6 @@ class CustomerOrderController extends Controller
         if ($roundObj !== 5) {
             $roundObj->round = $roundObj->round + 1;
             $roundObj->save();
-        } else if (!$roundObj) {
-            Round::create([
-                'tablet_id' => $tablet_id,
-                'round' => $round->round + 1
-            ]);
         }
 
         return redirect()->route('order.index')->with([

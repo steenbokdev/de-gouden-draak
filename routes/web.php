@@ -9,6 +9,7 @@ use App\Http\Controllers\DishController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RoundController;
 use App\Http\Controllers\SalesController;
 use App\Http\Middleware\EmployeeUserMiddleware;
 use App\Http\Middleware\LanguageMiddleware;
@@ -56,6 +57,7 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     });
 
     Route::middleware(EmployeeUserMiddleware::class)->group(function () {
+        Route::resource('rounds', RoundController::class)->only(['index', 'store']);
         Route::resource('dishes', DishController::class)->except(['show']);
         Route::resource('checkout', CheckoutOrderController::class)->only(['index', 'store']);
         Route::resource('sales', SalesController::class)->only(['index']);

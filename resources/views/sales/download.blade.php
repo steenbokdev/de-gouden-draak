@@ -1,12 +1,12 @@
 <h1>
-    VERKOOPCIJFERS {{ $date }}
+    {{ __('sales/download.page_title') }} {{ $date }}
 </h1>
 
 <table>
     <thead>
         <tr>
             <th>
-                Tijdstip
+                {{ __('sales/download.time') }}
             </th>
             <th>
                 {{ __('dish/shared.menu_number') }}
@@ -52,7 +52,7 @@
             <tr>
                 <td colspan="6">
                     <em>
-                        {{ __('dish/index.empty') }}
+                        {{ __('sales/download.empty') }}
                     </em>
                 </td>
             </tr>
@@ -62,7 +62,7 @@
 
 <span>
     <h2>
-        Totale omzet:
+        {{ __('sales/download.total_revenue') }}
     </h2>
 
     &euro; {{ $totalPrice }}

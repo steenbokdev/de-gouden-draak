@@ -2,6 +2,8 @@
 
 return [
     'page_title' => 'Sales',
+    'select_day' => 'Select day',
+    'download' => 'Download PDF',
     'filter' => [
         'start_date' => 'Start Date',
         'end_date' => 'End Date',

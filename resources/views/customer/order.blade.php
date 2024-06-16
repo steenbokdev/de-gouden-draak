@@ -1,5 +1,5 @@
 @extends('layouts.base', [
-    'title' => __('customer/order.page_title') . ' - ' . auth()->user()->firstname . ' - ' . __('customer/order.round', ['round' => $round])
+    'title' => __('customer/order.page_title') . ' - ' . auth()->user()->firstname . ' - ' . __('customer/order.round', ['round' => $round->round])
 ])
 
 @push('scripts')

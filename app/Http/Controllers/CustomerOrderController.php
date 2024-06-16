@@ -6,6 +6,7 @@ use App\Enums\Notification;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Models\Dish;
+use App\Models\Round;
 use App\Models\TabletOrder;
 use App\Models\TabletOrderLines;
 use DateTime;
@@ -18,7 +19,8 @@ class CustomerOrderController extends Controller
 
     public function index()
     {
-        $dishes = Dish::leftjoin('deals', 'dishes.id', '=', 'deals.dish_id')
+        $dishes = Dish::whereNotNull('dishes.price')
+            ->leftjoin('deals', 'dishes.id', '=', 'deals.dish_id')
             ->select('dishes.*', 'deals.price as discount_price')
             ->orderBy('menu_number')
             ->orderBy('menu_addition')
@@ -45,7 +47,7 @@ class CustomerOrderController extends Controller
         $round = $this->getRound($tablet_id);
         $lastOrderTime = $this->getLastOrderTime($tablet_id);
 
-        if ($round >= self::MAX_ROUNDS) {
+        if ($round->round >= self::MAX_ROUNDS) {
             return false;
         } else if ($lastOrderTime) {
             $lastOrderTime->order_time = new DateTime($lastOrderTime->order_time);
@@ -67,9 +69,7 @@ class CustomerOrderController extends Controller
 
     private function getRound($tablet_id)
     {
-        return TabletOrder::where('tablet_id', $tablet_id)
-                ->whereDate('order_time', today())
-                ->max('round') + 1;
+        return Round::where('tablet_id', $tablet_id)->first();
     }
 
     public function store(Request $request)
@@ -134,7 +134,7 @@ class CustomerOrderController extends Controller
 
         $order = TabletOrder::create([
             'tablet_id' => $tablet_id,
-            'round' => $round,
+            'round' => $round->round,
             'order_time' => now()
         ]);
 
@@ -147,6 +147,17 @@ class CustomerOrderController extends Controller
                 'dish_id' => $orderItem['dishId'],
                 'quantity' => $orderItem['count'],
                 'price' => $price
+            ]);
+        }
+
+        $roundObj = Round::where('tablet_id', $tablet_id)->first();
+        if ($roundObj !== 5) {
+            $roundObj->round = $roundObj->round + 1;
+            $roundObj->save();
+        } else if (!$roundObj) {
+            Round::create([
+                'tablet_id' => $tablet_id,
+                'round' => $round->round + 1
             ]);
         }
 

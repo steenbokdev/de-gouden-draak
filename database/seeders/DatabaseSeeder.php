@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            DishSeeder::class
+            DishSeeder::class,
+            RoundSeeder::class
         ]);
     }
 }

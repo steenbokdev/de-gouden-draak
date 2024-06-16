@@ -96,6 +96,7 @@ class SalesController extends Controller
 
         $dompdf->render();
 
-        return $dompdf->stream('document.pdf');
+        $date = $latest->created_at->format('dmY_His');
+        return $dompdf->stream("kassabon-$date.pdf");
     }
 }

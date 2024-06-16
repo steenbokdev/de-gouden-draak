@@ -59,7 +59,7 @@
                                     {{ $dish->category }}
                                 </td>
                                 <td>
-                                    <div data-side-dish="{{ $dish->menu_number }}#{{ $dish->name }}">
+                                    <div data-side-dish="{{ $dish->id }}#{{ $dish->name }}">
                                         <x-form.select id="">
                                             <option>Geen bijgerecht</option>
                                             <option>Witte Rijst</option>
@@ -70,7 +70,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a data-add-checkout-dish="{{ $dish->menu_number }}#{{ $dish->name }}#{{ $dish->discount_price ?? $dish->price }}">
+                                    <a data-add-checkout-dish="{{ $dish->id }}#{{ $dish->name }}#{{ $dish->discount_price ?? $dish->price }}">
                                         {{ __('checkout/index.add') }}
                                     </a>
                                 </td>

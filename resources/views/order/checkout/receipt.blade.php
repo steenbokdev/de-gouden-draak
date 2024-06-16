@@ -58,7 +58,17 @@
 
 <span style="font-size: 9px;">
     <strong>
-        Totaal:
+        {{ __('sales/index.total') }}:
     </strong>
     &euro; {{ $totalPrice }}
 </span>
+
+<br>
+<br>
+
+<div style="float: right;">
+    <strong style="font-size: 9px;">
+        {{ __('sales/feedback.prompt') }}
+    </strong><br>
+    <img src="data:image/png;base64,{{ $qrCode }}" width="45px" height="45px"/>
+</div>

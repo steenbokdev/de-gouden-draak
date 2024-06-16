@@ -11,6 +11,7 @@ use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class SalesController extends Controller
 {
@@ -84,6 +85,10 @@ class SalesController extends Controller
         $logoImage = base64_encode(file_get_contents(public_path('images/dragon-small.png')));
         $logoImageFlipped = base64_encode(file_get_contents(public_path('images/dragon-small-flipped.png')));
 
+        $qrCodePath = public_path('images/qrcode/' . time() . '.png');
+        $qrCode = QrCode::size(45)->generate(route('sales.feedback'), $qrCodePath);
+        $qrCode = base64_encode(file_get_contents($qrCodePath));
+
         $options = new Options();
         $dompdf = new Dompdf($options);
         $dompdf->setPaper([0, 0, 226.771, 283.464], 'portrait'); // Dimensions in mm (8cm x 10cm)
@@ -91,12 +96,28 @@ class SalesController extends Controller
             'sales' => $sales,
             'totalPrice' => $totalPrice,
             'logoImage' => $logoImage,
-            'logoImageFlipped' => $logoImageFlipped
+            'logoImageFlipped' => $logoImageFlipped,
+            'qrCode' => $qrCode
         ]));
 
         $dompdf->render();
 
         $date = $latest->created_at->format('dmY_His');
         return $dompdf->stream("kassabon-$date.pdf");
+    }
+
+    public function feedback()
+    {
+        return view('sales.feedback');
+    }
+
+    public function thankyou()
+    {
+        return view('sales.thankyou');
+    }
+
+    public function store()
+    {
+        // Feedback request # IGNORE
     }
 }

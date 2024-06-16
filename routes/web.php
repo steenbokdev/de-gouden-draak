@@ -52,6 +52,8 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         Route::resource('sales', SalesController::class)->only(['index']);
         Route::post('sales/download', [SalesController::class, 'download'])->name('sales.download');
         Route::post('sales/latest/download', [SalesController::class, 'receipt'])->name('sales.latest.download');
+        Route::get('sales/feedback', [SalesController::class, 'feedback'])->name('sales.feedback');
+        Route::get('sales/feedback/thankyou', [SalesController::class, 'thankyou'])->name('sales.feedback.thankyou');
         Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
     });
 });

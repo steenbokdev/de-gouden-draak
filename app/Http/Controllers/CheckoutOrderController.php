@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Notification;
 use App\Models\CheckoutOrder;
 use App\Models\Dish;
 use Illuminate\Http\Request;
@@ -32,6 +33,15 @@ class CheckoutOrderController extends Controller
     {
         $orderData = json_decode($request->input('order-data'), true);
 
+        if ($orderData === []) {
+            return redirect()->back()->with([
+                'notification' => [
+                    'type' => Notification::Danger,
+                    'body' => __('checkout/index.status.empty')
+                ]
+            ]);
+        }
+
         foreach ($orderData as $orderItem) {
             CheckoutOrder::create([
                 'dish_id' => $orderItem['dishId'],
@@ -40,6 +50,11 @@ class CheckoutOrderController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'notification' => [
+                'type' => Notification::Success,
+                'body' => __('checkout/index.status.success')
+            ]
+        ]);
     }
 }

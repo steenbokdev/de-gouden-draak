@@ -88,6 +88,7 @@ function showNotification(DishManager) {
         let result = confirm('Wil je je winkelmandje legen? / Do you want to empty your shopping cart?');
         if (result) {
             localStorage.clear();
+            location.reload();
         }
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.base', [
-    'title' => __('customer/order.page_title') . ' - ' . auth()->user()->firstname
+    'title' => __('customer/order.page_title') . ' - ' . auth()->user()->firstname . ' - ' . __('customer/order.round', ['round' => $round])
 ])
 
 @push('scripts')
@@ -43,9 +43,6 @@
 @endsection
 
 @section('content')
-    <h2>
-        {{ __('customer/order.round', ['round' => $round]) }}
-    </h2>
     <div class="table-container">
         <table class="table is-striped is-narrow is-hoverable is-fullwidth">
             <thead>

@@ -30,7 +30,10 @@ class CocktailController extends Controller
 
         if ($response->successful()) {
             $json = $response->json('drinks');
-            $cocktails = Cocktail::hydrate($json);
+
+            if ($json) {
+                $cocktails = Cocktail::hydrate($json);
+            }
         }
 
         return view('cocktail.index', [

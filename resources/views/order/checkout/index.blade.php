@@ -107,6 +107,15 @@
                     </button>
                 </div>
             </form>
+
+            <form action="{{ route('sales.latest.download') }}" method="post" class="mt-3">
+                @csrf
+                @method('POST')
+
+                <button type="submit" class="button is-ghost is-fullwidth">
+                    {{ __('checkout/index.download_receipt') }}
+                </button>
+            </form>
         </div>
     </div>
 @endsection

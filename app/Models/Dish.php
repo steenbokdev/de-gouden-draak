@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kyslik\ColumnSortable\Sortable;
 
 class Dish extends Model
@@ -19,7 +20,7 @@ class Dish extends Model
 
     public $sortable = ['menu_number', 'name', 'category'];
 
-    public function deals()
+    public function deals(): HasMany
     {
         return $this->hasMany(Deal::class);
     }

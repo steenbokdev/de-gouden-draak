@@ -1,5 +1,5 @@
 @extends('layouts.base', [
-    'title' => 'Index'
+    'title' => 'Index',
 ])
 
 @section('content')

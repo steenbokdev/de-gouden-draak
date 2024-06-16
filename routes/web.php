@@ -3,13 +3,17 @@
 use App\Http\Controllers\CheckoutOrderController;
 use App\Http\Controllers\CocktailController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RoundController;
 use App\Http\Controllers\SalesController;
+use App\Http\Middleware\EmployeeUserMiddleware;
 use App\Http\Middleware\LanguageMiddleware;
+use App\Http\Middleware\TabletUserMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(LanguageMiddleware::class)->group(function () {
@@ -18,7 +22,9 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     })->name('home');
 
     Route::get('login', [LoginController::class, 'login'])->name('login');
+    Route::get('login-tablet', [LoginController::class, 'loginTablet'])->name('login-tablet');
     Route::post('authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
+    Route::post('authenticate-tablet', [LoginController::class, 'authenticateTablet'])->name('authenticate-tablet');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::resource('cocktail', CocktailController::class)->only(['index']);
@@ -45,8 +51,13 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
             return view('customer.news');
         })->name('news');
     });
-    
-    Route::middleware('auth')->group(function () {
+
+    Route::middleware(TabletUserMiddleware::class)->group(function () {
+        Route::prefix('orders')->resource('order', CustomerOrderController::class)->only(['index', 'store']);
+    });
+
+    Route::middleware(EmployeeUserMiddleware::class)->group(function () {
+        Route::resource('rounds', RoundController::class)->only(['index', 'store']);
         Route::resource('dishes', DishController::class)->except(['show']);
         Route::resource('checkout', CheckoutOrderController::class)->only(['index', 'store']);
         Route::resource('sales', SalesController::class)->only(['index']);

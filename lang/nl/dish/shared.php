@@ -6,5 +6,6 @@ return [
     'name' => 'Naam',
     'price' => 'Prijs',
     'category' => 'Categorie',
-    'description' => 'Beschrijving'
+    'description' => 'Beschrijving',
+    'quantity' => 'Aantal'
 ];

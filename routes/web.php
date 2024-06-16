@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutOrderController;
 use App\Http\Controllers\CocktailController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DealController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\DishController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SalesController;
 use App\Http\Middleware\LanguageMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +48,8 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
     
     Route::middleware('auth')->group(function () {
         Route::resource('dishes', DishController::class)->except(['show']);
+        Route::resource('checkout', CheckoutOrderController::class)->only(['index', 'store']);
+        Route::resource('sales', SalesController::class)->only(['index']);
         Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
     });
 });

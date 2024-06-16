@@ -6,6 +6,8 @@ return [
         'cocktail' => 'Cocktails',
         'dishes' => 'Dishes',
         'deals' => 'Deals',
+        'checkout' => 'Cash Register Order',
+        'sales' => 'Sales',
         'login' => 'Login',
         'logout' => 'Logout'
     ],

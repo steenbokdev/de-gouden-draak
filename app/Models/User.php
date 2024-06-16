@@ -50,4 +50,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Check if the user is an employee.
+     *
+     * @return bool
+     */
+    public function isEmployee(): bool
+    {
+        return !str_starts_with($this->employee_id, 'tablet_');
+    }
 }

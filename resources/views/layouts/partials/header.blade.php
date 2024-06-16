@@ -19,30 +19,29 @@
     <div id="navbar-menu" class="navbar-menu">
         <div class="navbar-start">
             <x-header.navbar-item route="{{ route('home') }}"
-                                  label="{{ __('header.routes.home') }}"/>
+                                  label="{{ __('header.routes.home') }}" />
 
             <x-header.navbar-item route="{{ route('cocktail.index') }}"
-                                  label="{{ __('header.routes.cocktail') }}"/>
+                                  label="{{ __('header.routes.cocktail') }}" />
 
-            @auth
-                <x-header.navbar-item route="{{ route('dishes.index') }}"
-                                      label="{{ __('header.routes.dishes') }}"/>
+            @if(auth()->user())
+                @if(auth()->user()->isEmployee())
+                    <x-header.navbar-item route="{{ route('dishes.index') }}"
+                                          label="{{ __('header.routes.dishes') }}" />
 
-                <x-header.navbar-item route="{{ route('deals.index') }}"
-                                      label="{{ __('header.routes.deals') }}"/>
+                    <x-header.navbar-item route="{{ route('deals.index') }}"
+                                          label="{{ __('header.routes.deals') }}" />
 
-                <x-header.navbar-item route="{{ route('checkout.index') }}"
-                                      label="{{ __('header.routes.checkout') }}"/>
+                    <x-header.navbar-item route="{{ route('checkout.index') }}"
+                                          label="{{ __('header.routes.checkout') }}" />
 
-                <x-header.navbar-item route="{{ route('sales.index') }}"
-                                      label="{{ __('header.routes.sales') }}"/>
-            @endauth
-            {{--TODO: Onderscheid maken tablet + employee--}}
-            @auth()
-                <x-header.navbar-item route="{{ route('order.index') }}"
-                                      label="{{ __('header.routes.order') }}"/>
-
-            @endauth
+                    <x-header.navbar-item route="{{ route('sales.index') }}"
+                                          label="{{ __('header.routes.sales') }}" />
+                @else
+                    <x-header.navbar-item route="{{ route('order.index') }}"
+                                          label="{{ __('header.routes.order') }}" />
+                @endif
+            @endif
         </div>
 
         <div class="navbar-end">

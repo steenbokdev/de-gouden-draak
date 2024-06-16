@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.getElementById('reset-order').addEventListener('click', (e) => {
+        checkoutContent.items.forEach(item => checkoutContent.removeItem(item));
+    });
+
     document.getElementById('submit-order').addEventListener('click', (e) => {
         document.getElementById('order-data').value = JSON.stringify(checkoutContent.items);
     });

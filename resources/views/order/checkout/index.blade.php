@@ -83,9 +83,15 @@
                 <div id="checkout-container" class="p-3 mb-3 max-h-500 overflow-y"></div>
                 <input type="hidden" id="order-data" name="order-data">
 
-                <button id="submit-order" type="submit" class="button is-primary is-fullwidth">
-                    {{ __('checkout/index.checkout') }}
-                </button>
+                <div class="field is-grouped">
+                    <button id="reset-order" type="reset" class="button is-link is-outlined">
+                        {{ __('checkout/index.reset') }}
+                    </button>
+
+                    <button id="submit-order" type="submit" class="button is-primary is-fullwidth">
+                        {{ __('checkout/index.checkout') }}
+                    </button>
+                </div>
             </form>
         </div>
     </div>

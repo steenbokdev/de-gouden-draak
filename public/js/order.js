@@ -83,6 +83,15 @@ class DishManager {
     }
 }
 
+function showNotification(DishManager) {
+    if (DishManager.getDishes().length > 0) {
+        let result = confirm('Wil je je winkelmandje legen? / Do you want to empty your shopping cart?');
+        if (result) {
+            localStorage.clear();
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    new DishManager();
+    showNotification(new DishManager());
 });

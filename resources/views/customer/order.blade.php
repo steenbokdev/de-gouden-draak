@@ -8,50 +8,9 @@
 @endpush
 
 @section('addons-left')
-    <form action="{{ route('order.index') }}" method="GET">
-        <div class="field is-grouped">
-            <x-form.search id="search" type="text" placeholder="{{ __('dish/index.search') }}"
-                           value="{{ $searchQuery }}" />
-
-            <div class="field is-grouped">
-                <x-form.select id="category">
-                    <option disabled selected>
-                        {{ __('dish/index.category') }}
-                    </option>
-
-                    @foreach ($categories['collection'] as $category)
-                        <option value="{{ $category }}" @selected($category === $categories['selected'])>
-                            {{ $category }}
-                        </option>
-                    @endforeach
-                </x-form.select>
-
-                <div class="control">
-                    <button type="submit" class="button is-primary">
-                        {{ __('dish/index.apply') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="control">
-                <x-form.reset-filter route="{{ route('order.index') }}" />
-            </div>
-        </div>
-    </form>
-@endsection
-
-@section('addons-right')
     <button id="button-order" class="js-modal-trigger button is-primary is-outlined" data-target="modal-order">
         {{ __('customer/order.order_watch') }}
     </button>
-    <form id="place-order-form" action="{{ route('order.store') }}" method="post">
-        @csrf
-        @method('POST')
-
-        <button type="submit" id="place-order-button" class="button is-primary">
-            {{ __('customer/order.place_order') }}
-        </button>
-    </form>
 
     <div id="modal-order" class="modal">
         <div class="modal-background"></div>
@@ -66,30 +25,49 @@
     </div>
 @endsection
 
+@section('addons-right')
+    @if($canPlaceOrder)
+        <form id="place-order-form" action="{{ route('order.store') }}" method="post">
+            @csrf
+            @method('POST')
+
+            <button type="submit" id="place-order-button" class="button is-primary">
+                {{ __('customer/order.place_order') }}
+            </button>
+        </form>
+    @else
+        <button class="button is-primary" disabled>
+            {{ __('customer/order.place_order') }}
+        </button>
+    @endif
+@endsection
+
 @section('content')
-    <h4>
+    <h2>
         {{ __('customer/order.round', ['round' => $round]) }}
-    </h4>
+    </h2>
     <div class="table-container">
         <table class="table is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
             <tr>
                 <th>
-                    @sortablelink('menu_number', __('dish/shared.menu_number'))
+                    {{ __('dish/shared.menu_number') }}
                 </th>
                 <th>
-                    @sortablelink('name', __('dish/shared.name'))
+                    {{ __('dish/shared.name') }}
                 </th>
                 <th>
                     {{ __('dish/shared.price') }}
                 </th>
                 <th>
-                    @sortablelink('category', __('dish/shared.category'))
+                    {{ __('dish/shared.category') }}
                 </th>
                 <th>
                     {{ __('dish/shared.description') }}
                 </th>
-                <th />
+                <th>
+                    {{ __('dish/shared.quantity') }}
+                </th>
             </tr>
             </thead>
 
@@ -110,11 +88,11 @@
                         @isset($dish->price)
                             @if(isset($dish->discount_price))
                                 <s>
-                                    &euro; {{ $dish->price }}
+                                    &euro;{{ $dish->price }}
                                 </s>
-                                &euro; {{ $dish->discount_price }}
+                                &euro;{{ $dish->discount_price }}
                                 @else
-                                    &euro; {{ $dish->price }}
+                                    &euro;{{ $dish->price }}
                             @endif
                         @endisset
                     </td>
@@ -143,6 +121,4 @@
             </tbody>
         </table>
     </div>
-
-    {{ $dishes->appends(request()->except('page'))->links('vendor.pagination.bulma') }}
 @endsection

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const checkoutBtns = document.querySelectorAll('[data-add-checkout-dish]');
+    const sideDishBtns = document.querySelectorAll('[data-side-dish]');
     const checkoutContainer = document.getElementById('checkout-container');
 
     const checkoutContent = new CheckoutContent();
@@ -7,8 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutBtns.forEach(element => {
         element.addEventListener('click', () => {
             const [dishId, dishName, dishPrice] = element.dataset.addCheckoutDish.split('#');
-            const dish = new Dish(dishId, dishName, parseFloat(dishPrice));
-            checkoutContent.addDish(dish);
+            
+            sideDishBtns.forEach(sideElement => {
+                const [sideDishId, sideDishName] = sideElement.dataset.sideDish.split('#');
+
+                if (sideDishId === dishId && sideDishName === dishName) {
+                    let sideDish = sideElement.querySelector('select').value;
+                    const dish = new Dish(dishId, dishName, parseFloat(dishPrice), sideDish);
+                    checkoutContent.addDish(dish);
+                }
+            });
         });
     });
 
@@ -23,10 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class Dish {
 
-    constructor(dishId, dishName, price) {
+    constructor(dishId, dishName, price, sideDish) {
         this.dishId = dishId;
         this.dishName = dishName;
         this.price = price;
+        this.sideDish = sideDish;
     }
 
 }
@@ -37,6 +47,7 @@ class OrderItem {
         this.dishId = dish.dishId;
         this.dishName = dish.dishName;
         this.price = dish.price;
+        this.sideDish = dish.sideDish;
         this.count = 1;
     }
 
@@ -63,7 +74,7 @@ class CheckoutContent {
     }
 
     addDish(dish) {
-        let orderItem = this.items.find(item => item.dishId === dish.dishId);
+        let orderItem = this.items.find(item => item.dishId === dish.dishId && item.sideDish === dish.sideDish);
 
         if (!orderItem) {
             orderItem = new OrderItem(dish);
@@ -83,8 +94,8 @@ class CheckoutContent {
     }
 
     updateCheckoutItem(orderItem) {
-        const counter = document.getElementById(`counter-${orderItem.dishId}`);
-        const totalPrice = document.getElementById(`total-${orderItem.dishId}`);
+        const counter = document.getElementById(`counter-${orderItem.dishId}-${orderItem.sideDish}`);
+        const totalPrice = document.getElementById(`total-${orderItem.dishId}-${orderItem.sideDish}`);
         counter.innerText = orderItem.count;
         totalPrice.innerHTML = `&euro; ${orderItem.getTotalPrice()}`;
     }
@@ -98,12 +109,12 @@ class CheckoutContent {
 
         const content = document.createElement('div');
         content.className = 'content';
-        content.innerText = orderItem.dishName;
+        content.innerText = `${orderItem.dishName} - ${orderItem.sideDish}`;
 
         const controls = this.createControls(orderItem);
 
         const totalPrice = document.createElement('p');
-        totalPrice.id = `total-${orderItem.dishId}`;
+        totalPrice.id = `total-${orderItem.dishId}-${orderItem.sideDish}`;
         totalPrice.innerHTML = `&euro; ${orderItem.getTotalPrice()}`;
 
         content.append(totalPrice);
@@ -129,7 +140,7 @@ class CheckoutContent {
 
         const counter = document.createElement('span');
         counter.className = 'counter tag is-large';
-        counter.id = `counter-${orderItem.dishId}`;
+        counter.id = `counter-${orderItem.dishId}-${orderItem.sideDish}`;
         counter.innerText = orderItem.count;
 
         controls.append(minusBtn, counter, plusBtn);
@@ -156,7 +167,7 @@ class CheckoutContent {
 
     removeItem(orderItem) {
         this.items = this.items.filter(item => item.dishId !== orderItem.dishId);
-        document.getElementById(`counter-${orderItem.dishId}`).closest('.card').remove();
+        document.getElementById(`counter-${orderItem.dishId}-${orderItem.sideDish}`).closest('.card').remove();
         this.updateTotalPrice();
     }
 

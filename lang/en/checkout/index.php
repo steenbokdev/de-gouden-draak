@@ -9,5 +9,6 @@ return [
     'status' => [
         'empty' => 'The order must contains 1 dish',
         'success' => 'Order succesful'
-    ]
+    ],
+    'download_receipt' => 'Download latest order'
 ];

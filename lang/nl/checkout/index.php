@@ -9,5 +9,6 @@ return [
     'status' => [
         'empty' => 'De bestelling moet minimaal 1 bevatten',
         'success' => 'Bestelling succesvol betaald'
-    ]
+    ],
+    'download_receipt' => 'Download laatste bestelling'
 ];

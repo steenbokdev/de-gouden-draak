@@ -51,6 +51,7 @@ Route::middleware(LanguageMiddleware::class)->group(function () {
         Route::resource('checkout', CheckoutOrderController::class)->only(['index', 'store']);
         Route::resource('sales', SalesController::class)->only(['index']);
         Route::post('sales/download', [SalesController::class, 'download'])->name('sales.download');
+        Route::post('sales/latest/download', [SalesController::class, 'receipt'])->name('sales.latest.download');
         Route::prefix('dishes')->resource('deals', DealController::class)->only(['index', 'store', 'destroy']);
     });
 });

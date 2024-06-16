@@ -14,7 +14,7 @@ class CheckoutOrder extends Model
      *
      * @var array
      */
-    protected $fillable = ['dish_id', 'price_per_item', 'item_count'];
+    protected $fillable = ['dish_id', 'side_dish', 'price_per_item', 'item_count'];
 
     public function dish()
     {

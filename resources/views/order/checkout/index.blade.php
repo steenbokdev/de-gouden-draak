@@ -56,7 +56,7 @@
                                     {{ $dish->category }}
                                 </td>
                                 <td>
-                                    <a data-add-checkout-dish="{{ $dish->menu_number }}#{{ $dish->name }}#{{ $dish->price }}">
+                                    <a data-add-checkout-dish="{{ $dish->menu_number }}#{{ $dish->name }}#{{ $dish->discount_price ?? $dish->price }}">
                                         {{ __('checkout/index.add') }}
                                     </a>
                                 </td>

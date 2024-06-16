@@ -13,7 +13,12 @@ class CheckoutOrderController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all()->whereNotNull('price')->sortBy(['menu_number', 'menu_addition']);
+        $dishes = Dish::whereNotNull('dishes.price')
+            ->leftJoin('deals', 'dishes.id', '=', 'deals.dish_id')
+            ->select('dishes.*', 'deals.price as discount_price')
+            ->orderBy('menu_number')
+            ->orderBy('menu_addition')
+            ->get();
 
         return view('order.checkout.index', [
             'dishes' => $dishes

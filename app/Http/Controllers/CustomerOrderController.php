@@ -83,7 +83,7 @@ class CustomerOrderController extends Controller
     {
         return TabletOrder::where('tablet_id', $tablet_id)
             ->whereDate('order_time', today())
-            ->max('round') ?? 1;
+            ->max('round') + 1;
     }
 
     public function store(StoreOrderRequest $request)

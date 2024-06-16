@@ -65,7 +65,10 @@ class DishManager {
     }
 
     initOrderForm() {
-        document.getElementById('place-order-form').addEventListener('submit', (event) => this.handleOrderFormSubmit(event));
+        const form = document.getElementById('place-order-form');
+        if (form) {
+            form.addEventListener('submit', (event) => this.handleOrderFormSubmit(event));
+        }
     }
 
     handleOrderFormSubmit(event) {
@@ -83,8 +86,8 @@ class DishManager {
     }
 }
 
-function showNotification(DishManager) {
-    if (DishManager.getDishes().length > 0) {
+function showNotification(dishManager) {
+    if (dishManager.getDishes().length > 0) {
         let result = confirm('Wil je je winkelmandje legen? / Do you want to empty your shopping cart?');
         if (result) {
             localStorage.clear();
@@ -94,5 +97,6 @@ function showNotification(DishManager) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    showNotification(new DishManager());
+    const dishManager = new DishManager();
+    showNotification(dishManager);
 });

@@ -23,6 +23,7 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'dishes' => 'required|array',
+            'dishes.*.amount' => 'required|max:10|min:1',
         ];
     }
 }

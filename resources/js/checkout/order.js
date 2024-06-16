@@ -59,6 +59,7 @@ class CheckoutContent {
     constructor() {
         this.items = [];
         this.checkoutContainer = document.getElementById('checkout-container');
+        this.submitOrderBtn = document.getElementById('submit-order');
     }
 
     addDish(dish) {
@@ -72,6 +73,8 @@ class CheckoutContent {
             orderItem.incrementCount();
             this.updateCheckoutItem(orderItem);
         }
+
+        this.updateTotalPrice();
     }
 
     createCheckoutItem(orderItem) {
@@ -137,6 +140,7 @@ class CheckoutContent {
     incrementItem(orderItem) {
         orderItem.incrementCount();
         this.updateCheckoutItem(orderItem);
+        this.updateTotalPrice();
     }
 
     decrementItem(orderItem) {
@@ -146,11 +150,19 @@ class CheckoutContent {
         } else {
             this.removeItem(orderItem);
         }
+
+        this.updateTotalPrice();
     }
 
     removeItem(orderItem) {
         this.items = this.items.filter(item => item.dishId !== orderItem.dishId);
         document.getElementById(`counter-${orderItem.dishId}`).closest('.card').remove();
+        this.updateTotalPrice();
+    }
+
+    updateTotalPrice() {
+        const totalPrice = this.items.reduce((acc, item) => acc + (item.price * item.count), 0).toFixed(2);
+        this.submitOrderBtn.innerText = this.submitOrderBtn.innerText.replace(/\(.+$/,`(€${totalPrice})`);
     }
 
 }

@@ -89,7 +89,7 @@
                     </button>
 
                     <button id="submit-order" type="submit" class="button is-primary is-fullwidth">
-                        {{ __('checkout/index.checkout') }}
+                        {{ __('checkout/index.checkout') }} (&euro; 0,00)
                     </button>
                 </div>
             </form>

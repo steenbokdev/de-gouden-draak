@@ -15,4 +15,9 @@ class CheckoutOrder extends Model
      * @var array
      */
     protected $fillable = ['dish_id', 'price_per_item', 'item_count'];
+
+    public function dish()
+    {
+        return $this->belongsTo(Dish::class);
+    }
 }

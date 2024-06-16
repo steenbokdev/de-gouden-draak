@@ -7,6 +7,7 @@ return [
         'dishes' => 'Gerechten',
         'deals' => 'Aanbiedingen',
         'checkout' => 'Kassa bestelling',
+        'sales' => 'Verkoopcijfers',
         'login' => 'Log in',
         'logout' => 'Log uit'
     ],

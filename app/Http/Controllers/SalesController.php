@@ -104,4 +104,14 @@ class SalesController extends Controller
     {
         return view('sales.feedback');
     }
+
+    public function thankyou()
+    {
+        return view('sales.thankyou');
+    }
+
+    public function store()
+    {
+        // Feedback request # IGNORE
+    }
 }

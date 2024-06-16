@@ -1,5 +1,5 @@
 @extends('layouts.base', [
-    'title' => 'Feedback'
+    'title' => __('sales/feedback.page_title')
 ])
 
 @section('content')

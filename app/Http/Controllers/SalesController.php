@@ -99,4 +99,9 @@ class SalesController extends Controller
         $date = $latest->created_at->format('dmY_His');
         return $dompdf->stream("kassabon-$date.pdf");
     }
+
+    public function feedback()
+    {
+        return view('sales.feedback');
+    }
 }

@@ -24,27 +24,37 @@
             <x-header.navbar-item route="{{ route('cocktail.index') }}"
                                   label="{{ __('header.routes.cocktail') }}" />
 
-            @if(auth()->user())
-                @if(auth()->user()->isEmployee())
-                    <x-header.navbar-item route="{{ route('dishes.index') }}"
-                                          label="{{ __('header.routes.dishes') }}" />
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    Administrator
+                </a>
 
-                    <x-header.navbar-item route="{{ route('deals.index') }}"
-                                          label="{{ __('header.routes.deals') }}" />
+                <div class="navbar-dropdown is-right">
+                    @if(auth()->user())
+                        @if(auth()->user()->isEmployee())
+                            <x-header.navbar-item route="{{ route('dishes.index') }}"
+                                                label="{{ __('header.routes.dishes') }}" />
 
-                    <x-header.navbar-item route="{{ route('checkout.index') }}"
-                                          label="{{ __('header.routes.checkout') }}" />
+                            <x-header.navbar-item route="{{ route('deals.index') }}"
+                                                label="{{ __('header.routes.deals') }}" />
 
-                    <x-header.navbar-item route="{{ route('sales.index') }}"
-                                          label="{{ __('header.routes.sales') }}" />
+                            <x-header.navbar-item route="{{ route('checkout.index') }}"
+                                                label="{{ __('header.routes.checkout') }}" />
 
-                    <x-header.navbar-item route="{{ route('rounds.index') }}"
-                                          label="{{ __('header.routes.rounds') }}" />
-                @else
-                    <x-header.navbar-item route="{{ route('order.index') }}"
-                                          label="{{ __('header.routes.order') }}" />
-                @endif
-            @endif
+                            <x-header.navbar-item route="{{ route('sales.index') }}"
+                                                label="{{ __('header.routes.sales') }}" />
+
+                            <x-header.navbar-item route="{{ route('rounds.index') }}"
+                                                label="{{ __('header.routes.rounds') }}" />
+                        @else
+                            <x-header.navbar-item route="{{ route('order.index') }}"
+                                                label="{{ __('header.routes.order') }}" />
+                        @endif
+                    @endif
+                </div>
+            </div>
+
+            
         </div>
 
         <div class="navbar-end">

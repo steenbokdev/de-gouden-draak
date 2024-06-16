@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="columns">
-        <div class="column is-two-thirds">
+        <div class="column is-three-fifths">
             <div class="table-container">
                 <table class="table is-striped is-narrow is-hoverable is-fullwidth">
                     <thead>
@@ -20,6 +20,9 @@
                             </th>
                             <th>
                                 {{ __('dish/shared.category') }}
+                            </th>
+                            <th>
+                                {{ __('checkout/index.side_dish') }}
                             </th>
                             <th>
                                 {{ __('dish/index.actions.term') }}
@@ -54,6 +57,17 @@
                                 </td>
                                 <td>
                                     {{ $dish->category }}
+                                </td>
+                                <td>
+                                    <div data-side-dish="{{ $dish->menu_number }}#{{ $dish->name }}">
+                                        <x-form.select id="">
+                                            <option>Geen bijgerecht</option>
+                                            <option>Witte Rijst</option>
+                                            <option>Nasi/bami Goreng</option>
+                                            <option>Mihoen Goreng</option>
+                                            <option>Chinese Bami</option>
+                                        </x-form.select>
+                                    </div>
                                 </td>
                                 <td>
                                     <a data-add-checkout-dish="{{ $dish->menu_number }}#{{ $dish->name }}#{{ $dish->discount_price ?? $dish->price }}">

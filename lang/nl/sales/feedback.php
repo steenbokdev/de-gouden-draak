@@ -3,5 +3,6 @@
 return [
     'page_title' => 'Feedback',
     'thank_you' => 'Dankjewel voor je beoordeling!',
-    'go_back' => 'Ga terug naar de startpagina'
+    'go_back' => 'Ga terug naar de startpagina',
+    'prompt' => 'Geef ons een beoordeling!'
 ];

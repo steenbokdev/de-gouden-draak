@@ -3,5 +3,6 @@
 return [
     'page_title' => 'Feedback',
     'thank_you' => 'Thank you very much!',
-    'go_back' => 'Go back to the home page'
+    'go_back' => 'Go back to the home page',
+    'prompt' => 'Give us feedback!'
 ];

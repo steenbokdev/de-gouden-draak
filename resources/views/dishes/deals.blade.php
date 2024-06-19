@@ -77,7 +77,7 @@
         @csrf
         @method('POST')
 
-        <div class="field is-grouped is-fullwidth">
+        <div class="field is-fullwidth">
             <x-form.select id="dish_id" label="{{ __('dish/deal.dish') }}">
                 @forelse ($dishes as $deal)
                     <option value="{{ $deal->id }}">

@@ -90,7 +90,7 @@
                 @endforelse
             </x-form.select>
     
-            <x-form.input id="price" label="{{ __('dish/deal.sale_price') }}" type="number" value=""/>
+            <x-form.input id="price" label="{{ __('dish/deal.sale_price') }}" type="number" step="0.01" value=""/>
 
             <div class="control">
                 <button class="button is-primary" type="submit">

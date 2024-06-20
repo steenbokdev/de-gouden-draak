@@ -15,7 +15,8 @@ class DealController extends Controller
     public function index()
     {
         $deals = Deal::paginate(8);
-        $dishes = Dish::all()->diff(Deal::whereIn('id', $deals->pluck('id'))->get())->whereNotNull('price');
+        $dealDishIds = $deals->pluck('dish_id')->toArray();
+        $dishes = Dish::whereNotIn('id', $dealDishIds)->whereNotNull('price')->get();
         $date = $this->get_next_week();
 
         return view('dishes.deals', [

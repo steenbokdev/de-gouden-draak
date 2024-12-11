@@ -22,14 +22,6 @@
                     </option>
                 @endforeach
             </x-form.select>
-        
-            <x-form.select id="alcoholic">
-                @foreach ($alcoholics['collection'] as $key => $value)
-                    <option value="{{ $key }}" @selected($key === $alcoholics['selected'])>
-                        {{ $value }}
-                    </option>
-                @endforeach
-            </x-form.select>
 
             <button type="submit" class="button is-primary">
                 {{ __('cocktail/index.filter.apply') }}

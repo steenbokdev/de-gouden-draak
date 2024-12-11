@@ -40,7 +40,8 @@
         @foreach ($sales as $sale)
             <tr>
                 <td style="font-size: 9px;">
-                    {{ $sale->dish->name }}
+                    <strong>{{ $sale->dish->name }}</strong><br>
+                    <i>{{ $sale->side_dish }}<i>
                 </td>
                 <td style="font-size: 9px;">
                     &euro; {{ $sale->price_per_item }}

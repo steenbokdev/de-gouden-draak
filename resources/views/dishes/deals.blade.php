@@ -77,7 +77,7 @@
         @csrf
         @method('POST')
 
-        <div class="field is-grouped is-fullwidth">
+        <div class="field is-fullwidth">
             <x-form.select id="dish_id" label="{{ __('dish/deal.dish') }}">
                 @forelse ($dishes as $deal)
                     <option value="{{ $deal->id }}">
@@ -90,7 +90,7 @@
                 @endforelse
             </x-form.select>
     
-            <x-form.input id="price" label="{{ __('dish/deal.sale_price') }}" type="number" value=""/>
+            <x-form.input id="price" label="{{ __('dish/deal.sale_price') }}" type="number" step="0.01" value=""/>
 
             <div class="control">
                 <button class="button is-primary" type="submit">

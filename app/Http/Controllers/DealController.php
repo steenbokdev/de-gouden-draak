@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDealRequest;
 use App\Models\Deal;
 use App\Models\Dish;
+use Carbon\Carbon;
 use DateTime;
 
 class DealController extends Controller
@@ -14,8 +15,14 @@ class DealController extends Controller
      */
     public function index()
     {
-        $deals = Deal::paginate(8);
-        $dishes = Dish::all()->diff(Deal::whereIn('id', $deals->pluck('id'))->get())->whereNotNull('price');
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+
+        $deals = Deal::whereBetween('created_at', [$startOfWeek, $endOfWeek])->paginate(8);
+        $dealDishIds = $deals->pluck('dish_id')->toArray();
+
+        $dishes = Dish::whereNotIn('id', $dealDishIds)->whereNotNull('price')->get();
+
         $date = $this->get_next_week();
 
         return view('dishes.deals', [

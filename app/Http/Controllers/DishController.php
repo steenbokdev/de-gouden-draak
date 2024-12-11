@@ -6,6 +6,7 @@ use App\Enums\Notification;
 use App\Http\Requests\StoreDishRequest;
 use App\Http\Requests\UpdateDishRequest;
 use App\Models\Dish;
+use Carbon\Carbon;
 
 class DishController extends Controller
 {
@@ -19,7 +20,13 @@ class DishController extends Controller
 
         $dishes = Dish::sortable();
 
-        $dishes->leftJoin('deals', 'dishes.id', '=', 'deals.dish_id')->select('dishes.*', 'deals.price as discount_price');
+        $startOfWeek = Carbon::now()->subWeek()->startOfWeek();
+        $endOfWeek = Carbon::now()->subWeek()->endOfWeek();
+
+        $dishes->leftJoin('deals', function ($join) use ($startOfWeek, $endOfWeek) {
+            $join->on('dishes.id', '=', 'deals.dish_id')
+                ->whereBetween('deals.created_at', [$startOfWeek, $endOfWeek]);
+        })->select('dishes.*', 'deals.price as discount_price');
 
         $categories = Dish::whereNotNull('category')->distinct()->pluck('category')->unique();
 
@@ -28,8 +35,10 @@ class DishController extends Controller
         }
 
         if (isset($searchQuery)) {
-            $dishes = $dishes->where('name', 'like', "%$searchQuery%")
-                             ->orWhere('menu_number', 'like', "%$searchQuery%");
+            $dishes = $dishes->where(function ($query) use ($searchQuery) {
+                $query->where('name', 'like', "%$searchQuery%")
+                    ->orWhere('menu_number', 'like', "%$searchQuery%");
+            });
         }
 
         $dishes = $dishes->paginate(35);

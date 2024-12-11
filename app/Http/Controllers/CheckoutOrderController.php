@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\Notification;
 use App\Models\CheckoutOrder;
 use App\Models\Dish;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CheckoutOrderController extends Controller
@@ -14,8 +15,14 @@ class CheckoutOrderController extends Controller
      */
     public function index()
     {
+        $startOfLastWeek = Carbon::now()->subWeek()->startOfWeek();
+        $endOfLastWeek = Carbon::now()->subWeek()->endOfWeek();
+
         $dishes = Dish::whereNotNull('dishes.price')
-            ->leftJoin('deals', 'dishes.id', '=', 'deals.dish_id')
+            ->leftJoin('deals', function ($join) use ($startOfLastWeek, $endOfLastWeek) {
+                $join->on('dishes.id', '=', 'deals.dish_id')
+                    ->whereBetween('deals.created_at', [$startOfLastWeek, $endOfLastWeek]);
+            })
             ->select('dishes.*', 'deals.price as discount_price')
             ->orderBy('menu_number')
             ->orderBy('menu_addition')
